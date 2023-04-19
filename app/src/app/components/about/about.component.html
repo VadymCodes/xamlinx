@@ -1,0 +1,495 @@
+<div class="main">
+  <!-- Head title and image -->
+  <section class="section-head position-relative">
+    <!-- Background image -->
+    <img class="section-head-image" src="/assets/images/About-main.png" />
+    <img
+      class="section-head-image mobile"
+      src="/assets/images/About-main-mobile.png"
+    />
+
+    <div class="section-head-left position-absolute">
+      <h1>
+        Affordable Official-like Exams<br />Where you are your own proctor!
+      </h1>
+      <button
+        class="xam-btn-primary section-head-cta mt-lg-3"
+        (click)="onRequestAnExam()"
+      >
+        Request an Exam
+      </button>
+    </div>
+  </section>
+
+  <!-- Main title -->
+  <section class="section-main text-center mt-5 py-3 mx-auto">
+    <h4 class="mb-5 section-title">
+      We are the first 100% student-powered
+      <span class="section-content-red">test preparation platform.</span>
+    </h4>
+
+    <p class="mx-auto section-main-sub">
+      We are the platform on which high-scoring students become the professors
+      by composing mock exams similar to the official ones!
+    </p>
+  </section>
+
+  <!-- High score section -->
+  <section
+    class="
+      section-high
+      position-relative
+      d-flex
+      justify-content-end
+      text-center
+    "
+  >
+    <!-- Background graphic -->
+    <img
+      src="/assets/images/About-bg-1.svg"
+      class="section-high-bg section-bg"
+    />
+    <img
+      src="/assets/images/About-bg-1-md.svg"
+      class="section-high-bg-md section-bg"
+    />
+    <img
+      src="/assets/images/About-bg-1-sm.svg"
+      class="section-high-bg-sm section-bg"
+    />
+
+    <div class="position-absolute section-high-container">
+      <div
+        class="
+          section-high-title
+          d-flex
+          align-items-center
+          justify-content-center
+          flex-column flex-md-row
+        "
+      >
+        <img
+          src="/assets/images/AboutUs_Points.png"
+          class="title-point"
+          alt="Point"
+          width="96"
+        />
+        <h4 class="mb-0 section-title mt-2 mt-md-0">
+          Mock exams by high scorers
+        </h4>
+      </div>
+
+      <div
+        class="
+          d-flex
+          position-relative
+          justify-content-between
+          mt-5
+          section-high-content-container
+        "
+      >
+        <!-- Background image -->
+        <img
+          src="/assets/images/About-high-bg.png"
+          class="section-high-content-bg section-bg position-absolute"
+        />
+
+        <div class="row">
+          <div class="col-12 col-lg-6 section-high-content">
+            <strong>Single Mode</strong>
+            <p
+              class="mt-5 mt-lg-3 mt-xl-4 mb-5 mb-lg-3 section-content mx-auto"
+            >
+              We keep only mock exams from students who scored at least a 92% on
+              the official exam.
+            </p>
+          </div>
+
+          <div class="col-12 col-lg-6 section-high-content">
+            <strong>Group Mode</strong>
+            <p class="mt-5 my-lg-3 my-xl-4 section-content mx-auto">
+              One of the following requirements must be satisified:
+            </p>
+
+            <div class="d-flex flex-column section-bullet mx-auto">
+              <div class="d-flex mb-3 mb-xl-4">
+                <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;At least 1 member
+                in the group scored 92% or above
+              </div>
+              <div class="d-flex mb-3 mb-xl-4">
+                <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;At least 2
+                members in the group scored 85% or above
+              </div>
+              <div class="d-flex">
+                <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;At least 3
+                members in the group scored 80% or above
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reward section -->
+  <section
+    class="
+      section-reward
+      position-relative
+      d-flex
+      justify-content-center
+      text-center
+    "
+  >
+    <!-- Background graphics -->
+    <img
+      src="/assets/images/About-bg-2.svg"
+      class="section-bg section-reward-bg-1"
+    />
+    <img
+      src="/assets/images/About-bg-2-md.svg"
+      class="section-bg section-reward-bg-1-md"
+    />
+
+    <div class="position-absolute section-reward-container">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-center
+          mb-5
+          flex-column-reverse flex-md-row
+          section-reward-title
+        "
+      >
+        <h4 class="mb-0 mr-2 section-title mt-2 mt-md-0">
+          Rewards high scorers
+        </h4>
+        <img
+          src="/assets/images/AboutUs_Points.png"
+          alt="Point"
+          width="96"
+          class="title-point"
+        />
+      </div>
+
+      <div class="position-relative">
+        <img
+          src="/assets/images/About-bag.svg"
+          class="position-absolute section-bg section-reward-bg-2"
+        />
+        <p class="section-content mx-auto">
+          We make your official exam score memorable!<br /><br />
+          Yes, lunch is on us if you scored an A, or bundled up with your
+          high-performing friends, and composed a mock exam on our platform.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process section -->
+  <section class="section-process position-relative d-flex text-center">
+    <!-- Background graphics -->
+    <img
+      src="/assets/images/About-bg-3.svg"
+      class="section-bg section-process-bg-1"
+    />
+
+    <img
+      src="/assets/images/About-bg-3-sm.svg"
+      class="section-bg section-process-bg-1-sm"
+    />
+
+    <img
+      src="/assets/images/About-clock.png"
+      class="position-absolute section-bg section-process-bg-2"
+    />
+
+    <div class="position-absolute section-process-container">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-center
+          flex-column flex-md-row
+          mb-4
+          section-process-title
+        "
+      >
+        <img
+          src="/assets/images/AboutUs_Points.png"
+          alt="Point"
+          width="96"
+          class="title-point"
+        />
+        <h4 class="my-0 mt-2 mt-md-0 section-title">Efficient process</h4>
+      </div>
+
+      <div
+        class="
+          position-relative
+          section-process-content-container
+          d-flex
+          flex-column
+          justify-content-center
+        "
+      >
+        <p class="section-content mx-auto">
+          <u>Xamlinx is an on-demand platform.</u><br /><br />
+          You do not have to provide your mock exam Q&As until after a request
+          is made and you are invited to do so!
+        </p>
+        <p class="section-content mx-auto">
+          We invite you to upload your mock exam only when we are sure it has at
+          least a 1 in 5 chance of being selected!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Affordable section -->
+  <section
+    class="
+      section-affordable
+      position-relative
+      d-flex
+      justify-content-center
+      text-center
+    "
+  >
+    <!-- Background graphics -->
+    <img
+      src="/assets/images/About-bg-4.svg"
+      class="section-bg section-affordable-bg-1"
+    />
+
+    <div class="position-absolute section-affordable-container">
+      <div
+        class="
+          d-flex
+          align-items-center
+          justify-content-center
+          flex-column-reverse flex-md-row
+          mb-5
+          section-affordable-title
+        "
+      >
+        <h4 class="my-0 mr-2 mt-2 mt-md-0 section-title">
+          Affordable & reasonable
+        </h4>
+        <img
+          src="/assets/images/AboutUs_Points.png"
+          alt="Point"
+          width="96"
+          class="title-point"
+        />
+      </div>
+
+      <div class="position-relative">
+        <img
+          src="/assets/images/About-coin.png"
+          class="position-absolute section-bg section-affordable-bg-2"
+        />
+
+        <p class="section-content mx-auto">
+          Standard mock exams go for less than $50 each.<br /><br />
+          Premium mock exams combine the aptitude of high scoring students with
+          the expertise of subject matter specialists in order to deliver the
+          highest exam quality.<br /><br />
+          We do review all mock exams on our site, not just the premium ones.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verification section -->
+  <section class="section-verification d-flex flex-column text-center">
+    <!-- Background graphic -->
+    <img src="/assets/images/About-bg-5-top.svg" class="section-bg" />
+
+    <div class="section-verification-container">
+      <h4 class="section-title mb-5">We take verification very seriously!</h4>
+
+      <p class="section-content mx-auto">
+        From the time a user first interacts with our platform seeking to upload
+        a new mock exam, to the time another receives it, it is a bit of rocket
+        science in between; briefly, let’s just say that it takes a lot of
+        work!<br /><br />
+        Below are just a few checks, among many, that have to be done:<br />
+        <br />
+      </p>
+
+      <div class="d-flex flex-column section-bullet">
+        <div
+          class="
+            d-flex
+            justify-content-center
+            mb-4
+            mx-auto
+            section-bullet-point
+          "
+        >
+          <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;We make sure that mock
+          exams are not copies of the official ones
+        </div>
+        <div
+          class="
+            d-flex
+            justify-content-center
+            mb-4
+            mx-auto
+            section-bullet-point
+          "
+        >
+          <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;We verify that the
+          student belongs to the claimed institution
+        </div>
+        <div class="d-flex justify-content-center mx-auto section-bullet-point">
+          <fa-icon [icon]="faArrowRight"></fa-icon>&nbsp;We verify the student
+          grade
+        </div>
+      </div>
+    </div>
+
+    <img src="/assets/images/About-bg-5-btm.svg" class="section-bg" />
+  </section>
+
+  <!-- Team section -->
+  <section class="section-team position-relative text-center">
+    <!-- Mobile text -->
+    <div class="section-content-sm mx-auto">
+      <p class="section-content section-content-first-sm mx-auto">
+        And to ensure that all this work gets done, we have a
+        <span class="section-content-red">highly motivated</span> and
+        <span class="section-content-red">hard-working team</span>.
+      </p>
+    </div>
+
+    <!-- Background graphic -->
+    <img src="/assets/images/About-bg-6.svg" class="section-bg" />
+
+    <div
+      class="
+        d-flex
+        flex-column
+        align-items-center
+        section-team-container
+      "
+    >
+      <p class="section-content section-content-first mx-auto">
+        And to ensure that all this work gets done, we have a
+        <span class="section-content-red">highly motivated</span> and
+        <span class="section-content-red">hard-working team</span>.
+      </p>
+      <p class="section-content section-content-second mx-auto">
+        We all work remotely and are spread across <b>three continents</b>,
+        although our point of reference is in North America.
+      </p>
+
+      <div class="map-container">
+        <div class="spinner-border text-primary" role="status" *ngIf="loadingMap">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div id="map" ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Members section -->
+  <section class="section section-members position-relative">
+    <!-- Left arrow -->
+    <fa-icon
+      [icon]="faChevronLeft"
+      class="section-members-arrow arrow-left position-absolute"
+      role="button"
+      (click)="onArrowClick(carousel, false)"
+    ></fa-icon>
+    <!-- Right arrow -->
+    <fa-icon
+      [icon]="faChevronRight"
+      class="section-members-arrow arrow-right position-absolute"
+      role="button"
+      (click)="onArrowClick(carousel, true)"
+    ></fa-icon>
+
+    <!-- Bootstrap's carousel -->
+    <ngb-carousel
+      #carousel
+      [showNavigationIndicators]="false"
+      [showNavigationArrows]="false"
+      [interval]="0"
+    >
+      <ng-template ngbSlide *ngFor="let group of groups">
+        <div class="row justify-content-center">
+          <div
+            class="
+              section-members-member
+              col
+              d-flex
+              flex-column
+              text-center
+              align-items-center
+            "
+            *ngFor="let member of group"
+            style="max-width: min-content"
+          >
+            <div
+              class="
+                image-background
+                d-flex
+                align-items-center
+                justify-content-center
+              "
+            >
+              <img
+                [src]="member.details.avatar"
+                [alt]="
+                  member.details.firstName +
+                  ' ' +
+                  member.details.lastName +
+                  ' image'
+                "
+                *ngIf="!member.active"
+                role="button"
+                (click)="onMemberClick(member.id)"
+              />
+              <div
+                *ngIf="member.active"
+                class="section-member-content overflow-auto"
+              >
+                {{ member.details.summary }}
+
+                <p (click)="onMemberLocation(member)" class="my-2" role="button">Member's Location</p>
+              </div>
+            </div>
+            <h5 class="mt-4" role="button" (click)="onMemberClick(member.id)">
+              {{ member.details.firstName + " " + member.details.lastName }}
+            </h5>
+
+            <p>{{ member.details.position }}</p>
+
+            <a [href]="member.details.linkedin_url" target="_blank">
+              <img
+                src="/assets/images/About-linkedin.png"
+                alt="Member's Linkedin"
+                width="36"
+              />
+            </a>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </section>
+
+  <!-- CTA section -->
+  <section
+    class="section-cta d-flex flex-column align-items-center text-center"
+  >
+    <!-- Background image -->
+    <img src="/assets/images/About-bg-7.svg" class="section-bg" />
+
+    <p class="mb-1 mb-md-2">Ready for Success?</p>
+
+    <button class="xam-btn-primary" (click)="onJoinClick()">Join now</button>
+  </section>
+</div>

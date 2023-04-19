@@ -1,0 +1,190 @@
+<div class="app-exam-info text-center my-5 mx-auto position-relative d-flex">
+  <!-- Background left graphic -->
+  <img
+    src="/assets/images/bg-main-left.svg"
+    class="img-fluid position-absolute exam-background exam-background-left"
+  />
+
+  <div class="d-flex flex-column w-100" style="height: min-content">
+    <!-- Background top graphic -->
+    <img
+      src="/assets/images/bg-main-top.svg"
+      class="img-fluid exam-background exam-background-top"
+    />
+
+    <div class="form-wrapper">
+      <!-- Title -->
+      <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+      <div class="mx-auto position-relative">
+        <div class="position-absolute left-0 leave-btn">
+          <app-leave-button></app-leave-button>
+        </div>
+        <h1 class="my-4">Exam Information</h1>
+      </div>
+
+      <div class="spinner-border text-primary" role="status" *ngIf="loading">
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div class="mx-auto my-4 text-left" *ngIf="!loading && exam">
+        <div class="form-group xam-textarea-wrap">
+          <!-- Summary field -->
+          <div class="xam-pull-tab"></div>
+          <label for="summary" class="col-form-label col-form-label-sm"
+            >Summary</label
+          >
+          <textarea
+            [value]="exam!.summary"
+            class="form-control xam-input-primary"
+            [readonly]="true"
+          >
+          </textarea>
+        </div>
+
+        <!-- Grade value field -->
+        <div class="form-group">
+          <label for="gradeValue" class="col-form-label col-form-label-sm"
+            >Grade Value</label
+          >
+          <input
+            id="gradeValue"
+            type="number"
+            class="form-control xam-input-primary"
+            [readonly]="true"
+            [value]="exam!.grade_value"
+          />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <!-- Discipline field -->
+            <label for="discipline" class="col-form-label col-form-label-sm"
+              >Discipline</label
+            >
+            <input
+              id="discipline"
+              class="form-control xam-input-primary"
+              [readonly]="true"
+              [value]="exam.discipline!.name"
+            />
+          </div>
+
+          <div class="col">
+            <!-- Level field -->
+            <label for="levelId" class="col-form-label col-form-label-sm"
+              >Level</label
+            >
+            <input
+              id="levelId"
+              class="form-control xam-input-primary"
+              [readonly]="true"
+              [value]="exam.level!.name"
+            />
+          </div>
+
+          <div class="col">
+            <!-- Subject field -->
+            <label for="subjectId" class="col-form-label col-form-label-sm"
+              >Subject</label
+            >
+            <input
+              id="subjectId"
+              class="form-control xam-input-primary"
+              [readonly]="true"
+              [value]="exam.subject!.name"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-5 mr-auto">
+            <div class="form-group">
+              <!-- Professor email field -->
+              <label for="profEmail" class="col-form-label col-form-label-sm"
+                >Professor Email</label
+              >
+              <input
+                type="email"
+                id="profEmail"
+                class="form-control xam-input-primary"
+                [readonly]="true"
+                [value]="exam.professor!.email"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-5 ml-auto">
+            <div class="form-group">
+              <!-- Professor web address field -->
+              <label for="profWeb" class="col-form-label col-form-label-sm"
+                >Professor Web Address</label
+              >
+              <input
+                id="profWeb"
+                class="form-control xam-input-primary"
+                [readonly]="true"
+                [value]="exam.professor!.www_url"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mr-auto">
+            <div class="form-group">
+              <!-- Professor first name field -->
+              <label
+                for="profFirstName"
+                class="col-form-label col-form-label-sm"
+                >Professor First Name</label
+              >
+              <input
+                id="profFirstName"
+                class="form-control xam-input-primary"
+                [readonly]="true"
+                [value]="exam.professor!.first_name"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-5 ml-auto">
+            <div class="form-group">
+              <!-- Professor last name field -->
+              <label for="profLastName" class="col-form-label col-form-label-sm"
+                >Professor Last Name</label
+              >
+              <input
+                id="profLastName"
+                type="text"
+                class="form-control xam-input-primary"
+                [readonly]="true"
+                [value]="exam.professor!.last_name"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Update button -->
+        <div class="text-center mt-5">
+          <a [routerLink]="'review'">
+            <button class="xam-btn-second">Review</button>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+    </div>
+
+    <!-- Background bottom graphic -->
+    <img
+      src="/assets/images/bg-main-bottom.svg"
+      class="img-fluid exam-background exam-background-bottom"
+    />
+  </div>
+
+  <!-- Background right graphic -->
+  <img
+    src="/assets/images/bg-main-right.svg"
+    class="img-fluid position-absolute exam-background exam-background-right"
+  />
+</div>

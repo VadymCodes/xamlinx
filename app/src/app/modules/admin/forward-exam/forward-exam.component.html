@@ -1,0 +1,139 @@
+<div class="app-forward-exam container text-center">
+  <!-- Title -->
+  <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+  <div class="mx-auto position-relative">
+    <div class="position-absolute left-0 ml-3 leave-btn">
+      <app-leave-button></app-leave-button>
+    </div>
+    <h1 class="my-5">Forward Exam</h1>
+  </div>
+
+  <div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <form [formGroup]="form" *ngIf="!loading">
+    <div class="row m-auto">
+      <div class="col-sm-6 pr-sm-5 text-left">
+        <label for="exam-forward-select-exam">Select exam:</label>
+        <ng-select
+          id="exam-forward-select-exam"
+          class="xam-input-primary"
+          placeholder="Exam"
+          formControlName="exam"
+          bindLabel="summary"
+          bindValue="id"
+          (change)="onSelectExam()"
+          [items]="exams"
+        >
+        </ng-select>
+
+        <app-forward-exam-detail
+          [exam]="selectedExam"
+        ></app-forward-exam-detail>
+      </div>
+
+      <div class="col-sm-6 pl-sm-5 text-left">
+        <label for="exam-forward-select-reviewer">Select reviewer(s):</label>
+        <div
+          formArrayName="reviewers"
+          *ngFor="
+            let review of formReviewersControl.controls;
+            let index = index
+          "
+          class="d-flex align-items-center mb-2"
+        >
+          <ng-select
+            id="exam-forward-select-reviewer"
+            class="xam-input-primary w-100"
+            placeholder="Reviewer"
+            [formControlName]="index"
+            [readonly]="!formExamControl.value"
+            (change)="onSelectReviewer(index)"
+          >
+            <ng-option
+              *ngFor="let reviewer of reviewers"
+              [value]="reviewer"
+            >
+              ({{reviewer.work_load}}) {{ reviewer.firstName }} {{ reviewer.lastName }}
+            </ng-option>
+          </ng-select>
+
+          <fa-icon
+            [icon]="faEye"
+            class="color-red ml-2"
+            type="button"
+            [ngStyle]="{
+              opacity:
+                selectedDetailReviewer &&
+                formReviewersControl.at(index).value.id ===
+                  selectedDetailReviewer.id
+                  ? '1'
+                  : '0.5'
+            }"
+            *ngIf="formReviewersControl.at(index).value"
+            (click)="onCheckReviewerDetail(index)"
+          ></fa-icon>
+        </div>
+
+        <app-forward-reviewer-detail
+          [reviewer]="selectedDetailReviewer"
+        ></app-forward-reviewer-detail>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="xam-btn-second my-5 submit-btn"
+      [disabled]="
+        !formExamControl.valid ||
+        formReviewersControl.value.length <= 1 ||
+        submitting
+      "
+      (click)="onConfirming(modal)"
+    >
+      <span
+        *ngIf="submitting"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Submit
+    </button>
+
+    <!-- Error section -->
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+  </form>
+</div>
+
+<!-- Confirmatino modal -->
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-confirmation">Confirmation</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.close(false)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        Do you want to forward this exam to selected reviewer(s)?
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="xam-btn-primary" (click)="modal.close(false)">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="xam-btn-second ml-2"
+      (click)="modal.close(true)"
+    >
+      Confirm
+    </button>
+  </div>
+</ng-template>

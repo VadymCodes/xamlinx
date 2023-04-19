@@ -1,0 +1,82 @@
+<div class="app-reviewers container text-center">
+  <!-- Title -->
+  <h1 class="my-5">Reviewers</h1>
+
+  <!-- Add new button -->
+  <div class="text-left">
+    <a [routerLink]="['/admin', 'reviewers', 'add']">
+      <button class="xam-btn-second mb-4">Add new reviewer</button>
+    </a>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading && !reviewers.length">
+          <td colspan="3" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="showReviewers.length === 0 && !loading">
+          <td colspan="3" class="text-center">No result</td>
+        </tr>
+
+        <!-- Row data -->
+        <tr *ngFor="let reviewer of showReviewers">
+          <td>{{ reviewer.firstName }}</td>
+          <td>{{ reviewer.lastName }}</td>
+          <td style="min-width: 100px">
+            <a [routerLink]="['/admin', 'reviewers', reviewer.id]">
+              <button
+                class="btn btn-primary btn-sm py-0"
+                style="min-width: max-content"
+              >
+                <fa-icon [icon]="faEye"></fa-icon> View
+              </button></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Table footer -->
+  <div class="d-flex justify-content-between my-5">
+    <!-- Pagination -->
+    <ngb-pagination
+      [collectionSize]="collectionSize"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="refreshTable()"
+    >
+    </ngb-pagination>
+
+    <!-- Page size -->
+    <select
+      class="custom-select"
+      style="width: auto"
+      [(ngModel)]="pageSize"
+      (ngModelChange)="refreshTable()"
+    >
+      <option [ngValue]="5">5 items per page</option>
+      <option [ngValue]="10">10 items per page</option>
+      <option [ngValue]="50">50 items per page</option>
+    </select>
+  </div>
+</div>

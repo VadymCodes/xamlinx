@@ -1,0 +1,134 @@
+<div class="container text-center">
+  <!-- Title -->
+  <h1 class="mt-0 mb-3">Watermark</h1>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <!-- Watermark table -->
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>Watermark</th>
+          <th>Date Uploaded</th>
+          <th class="status-col">Status</th>
+          <th class="action-col">Action</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="4" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="!watermarks">
+          <td colspan="4" class="text-center">No result</td>
+        </tr>
+
+        <!-- Row data -->
+        <tr *ngFor="let watermark of watermarks; let index = index">
+          <!-- Preview link -->
+          <td>
+            <span
+              (click)="onView(watermark, index)"
+              role="button"
+              *ngIf="!gettingPreviewUrl[index]"
+              class="view-link"
+              ><fa-icon
+                [icon]="faEye"
+                [ngStyle]="{ 'margin-right': '5px' }"
+              ></fa-icon
+              >Click to View</span
+            >
+
+            <!-- Loading indicator when getting preview link -->
+            <div
+              class="spinner-border text-primary"
+              role="status"
+              *ngIf="gettingPreviewUrl[index]"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+
+          <!-- Created date -->
+          <td>{{ watermark.created_at.date | date: "short" }}</td>
+
+          <!-- Status -->
+          <td class="status-col">
+            <span [class]="'badge ' + getStatusBadgeStyle(watermark)">{{
+              watermark.status
+            }}</span>
+          </td>
+
+          <!-- Actions -->
+          <td class="action-col">
+            <button
+              class="btn btn-success btn-sm py-0"
+              [disabled]="watermark.status === 'Inactive'"
+              [ngStyle]="{ 'margin-right': '5px' }"
+              [disabled]="watermark.status === WATERMARK_STATUS_ACTIVE || submitting"
+              (click)="onSetAsActive(watermark)"
+            >
+              Set as Active
+            </button>
+            <button
+              class="btn btn-danger btn-sm py-0"
+              [disabled]="watermark.status === WATERMARK_STATUS_ACTIVE || submitting"
+              (click)="onDelete(watermark)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <input
+      [ngStyle]="{ display: 'none' }"
+      #fileUpload
+      type="file"
+      accept="image/*"
+      (change)="onUpload(fileUpload)"
+    />
+
+    <div class="text-center">
+      <button
+        class="xam-btn-second"
+        (click)="onStartUpload(fileUpload)"
+        [disabled]="submitting"
+      >
+        <span
+          *ngIf="submitting"
+          class="spinner-border spinner-border-sm mr-1"
+          [ngStyle]="{'margin-bottom': '3px'}"></span>
+        Upload New Watermark
+      </button>
+    </div>
+
+    <!-- Table footer -->
+    <div class="d-flex justify-content-between my-5">
+      <!-- Pagination -->
+      <ngb-pagination
+        [collectionSize]="collectionSize"
+        [(page)]="page"
+        [pageSize]="pageSize"
+      >
+      </ngb-pagination>
+
+      <!-- Page size -->
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="50">50 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>

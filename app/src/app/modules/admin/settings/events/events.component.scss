@@ -1,0 +1,13 @@
+h1 {
+  font-size: 2.75rem; // Design specification
+
+  @media only screen and (max-width: 992px) {
+      display: none;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .xam-table-primary th {
+      padding: 0.938rem 0.625rem !important;
+  }
+}

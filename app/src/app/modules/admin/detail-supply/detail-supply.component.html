@@ -1,0 +1,148 @@
+<div class="app-detail-supply text-center mx-auto my-4 d-flex position-relative">
+  <!-- Background left graphic -->
+  <img src="/assets/images/bg-main-left.svg" class="img-fluid position-absolute detail-background detail-background-left" />
+
+  <div class="d-flex flex-column w-100" style="height: min-content">
+    <!-- Background top graphic -->
+    <img src="/assets/images/bg-main-top.svg" class="img-fluid detail-background detail-background-top" />
+
+    <div class="wrapper position-relative">
+      <!-- Title -->
+      <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+      <div class="mx-auto position-relative">
+        <div class="position-absolute left-0 leave-btn">
+          <app-leave-button></app-leave-button>
+        </div>
+        <h1 class="my-4">Exam Detail</h1>
+      </div>
+
+      <!-- Exam detail -->
+      <div *ngIf="exam" class="text-left mx-auto">
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Summary</label>
+          <div class="col-sm-6">
+            <p>{{ exam.summary }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Grade Value</label>
+          <div class="col-sm-6">
+            <p>{{ exam.grade_value }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Discipline</label>
+          <div class="col-sm-6">
+            <p>{{ exam.discipline!.name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Level</label>
+          <div class="col-sm-6">
+            <p>{{ exam.level!.name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Subject</label>
+          <div class="col-sm-6">
+            <p>{{ exam.subject!.name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Course Number</label>
+          <div class="col-sm-6">
+            <p>{{ exam.course_number ? exam.course_number : '-'}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Semester</label>
+          <div class="col-sm-6">
+            <p>{{ exam.semester ? getSemester(exam.semester).name : '' }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Uploaded By</label>
+          <div class="col-sm-6">
+            <p>{{ exam.student!.firstName + ' ' + exam.student!.lastName + ' (' + exam.student!.email + ') at ' + exam.school!.school_name}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Exam Date</label>
+          <div class="col-sm-6">
+            <p>{{ exam.exam_date.date | date }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Professor</label>
+          <div class="col-sm-6">
+            <p class="mb-1">{{ exam.professor!.first_name + ' ' + exam.professor!.last_name + ' (' + exam.professor!.email + ')' }}</p>
+            <p><a href="{{ exam.professor!.www_url }}" target="_blank">{{ exam.professor!.www_url }}</a></p>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-6 col-form-label py-0">Verified</label>
+          <div class="col-sm-6">
+            <span *ngIf="exam.verified" class="badge badge-success">Verfied</span>
+            <span *ngIf="!exam.verified" class="badge badge-danger">Not verfied</span>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <label class="col-sm-6 col-form-label py-0">Ungraded Actual Exam</label>
+          <div class="col-sm-6">
+            <a *ngIf="getUpload(smUploadFields.ungraded_exam_actual).url" href="{{ getUpload(smUploadFields.ungraded_exam_actual).url }}" target="_blank">
+              <fa-icon [icon]="faFilePdf"></fa-icon> View
+            </a>
+            <span> ({{ getUpload(smUploadFields.ungraded_exam_actual).msg }})</span>
+          </div>
+        </div>
+        <div class="row my-3">
+          <label class="col-sm-6 col-form-label py-0">Graded Actual Exam</label>
+          <div class="col-sm-6">
+            <a *ngIf="getUpload(smUploadFields.graded_exam_actual).url" href="{{ getUpload(smUploadFields.graded_exam_actual).url }}" target="_blank">
+              <fa-icon [icon]="faFilePdf"></fa-icon> View
+            </a>
+            <span> ({{ getUpload(smUploadFields.graded_exam_actual).msg }})</span>
+          </div>
+        </div>
+        <div class="row my-3" *ngIf="!exam.qa_mode">
+          <label class="col-sm-6 col-form-label py-0">Ungraded Mock Exam</label>
+          <div class="col-sm-6">
+            <a *ngIf="getUpload(smUploadFields.ungraded_mock_exam).url" href="{{ getUpload(smUploadFields.ungraded_mock_exam).url }}" target="_blank">
+              <fa-icon [icon]="faFilePdf"></fa-icon> View
+            </a>
+            <span> ({{ getUpload(smUploadFields.ungraded_mock_exam).msg }})</span>
+          </div>
+        </div>
+        <div class="row my-3" *ngIf="!exam.qa_mode">
+          <label class="col-sm-6 col-form-label py-0">Graded Mock Exam</label>
+          <div class="col-sm-6">
+            <a *ngIf="getUpload(smUploadFields.graded_mock_exam).url" href="{{ getUpload(smUploadFields.graded_mock_exam).url }}" target="_blank">
+              <fa-icon [icon]="faFilePdf"></fa-icon> View
+            </a>
+            <span> ({{ getUpload(smUploadFields.graded_mock_exam).msg }})</span>
+          </div>
+        </div>
+      </div>
+      <div class="row text-left my-5">
+        <div class="col-sm-6">
+          <button *ngIf="exam && !exam.verified" [disabled]="loading || exam.uploads!.length !== requiredNumOfUploads" class="xam-btn-second verified-btn" (click)="markAsVerified()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+            Mark as verified
+          </button>
+        </div>
+        <div class="col-sm-6">
+          <button *ngIf="exam && exam.uploads!.length < 4" [disabled]="loading" class="xam-btn-second upload-btn" (click)="askToUpload(exam.id)">
+            Ask to upload exams
+          </button>
+        </div>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </div>
+
+    <!-- Background bottom graphic -->
+    <img src="/assets/images/bg-main-bottom.svg" class="img-fluid detail-background detail-background-bottom" />
+  </div>
+
+  <!-- Background right graphic -->
+  <img src="/assets/images/bg-main-right.svg" class="img-fluid position-absolute detail-background detail-background-right" />
+</div>

@@ -1,0 +1,453 @@
+<div
+  class="app-detail-reviewer text-center mx-auto my-4 d-flex position-relative"
+>
+  <!-- Background left graphic -->
+  <img
+    src="/assets/images/bg-main-left.svg"
+    class="img-fluid position-absolute detail-background detail-background-left"
+  />
+
+  <div class="d-flex flex-column w-100" style="height: min-content">
+    <!-- Background top graphic -->
+    <img
+      src="/assets/images/bg-main-top.svg"
+      class="img-fluid detail-background detail-background-top"
+    />
+
+    <form
+      [formGroup]="form"
+      class="wrapper position-relative"
+      (submit)="onSubmit()"
+    >
+      <!-- Title -->
+      <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+      <div class="mx-auto position-relative">
+        <div class="position-absolute left-0 leave-btn">
+          <app-leave-button></app-leave-button>
+        </div>
+        <h1>Reviewer Detail</h1>
+      </div>
+
+      <!-- Loading indicator -->
+      <div class="text-center" *ngIf="loadingPage">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+
+      <div class="row text-left" *ngIf="!loadingPage">
+        <!-- First name field -->
+        <div class="form-group col-sm-6 col-lg-5 mr-0 mr-lg-auto">
+          <label class="col-form-label">First Name</label>
+          <input
+            type="text"
+            formControlName="first_name"
+            class="form-control xam-input-primary"
+            placeholder="First Name"
+            [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"
+            [readonly]="!isAdd"
+          />
+
+          <!-- First name error -->
+          <div
+            *ngIf="submitted && f.first_name.errors"
+            class="invalid-feedback text-left"
+          >
+            <div *ngIf="f.first_name.errors.required">
+              First Name is required
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- Last name field -->
+        <div class="form-group col-sm-6 col-lg-5 ml-0 ml-lg-auto">
+          <label class="col-form-label">Last Name</label>
+          <input
+            type="text"
+            formControlName="last_name"
+            class="form-control xam-input-primary"
+            placeholder="Last Name"
+            [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"
+            [readonly]="!isAdd"
+          />
+
+          <!-- Last name error -->
+          <div
+            *ngIf="submitted && f.last_name.errors"
+            class="invalid-feedback text-left"
+          >
+            <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- Email field -->
+        <div class="form-group col-sm-6 col-lg-5 mr-0 mr-lg-auto">
+          <label class="col-form-label">Email</label>
+          <div class="input-group">
+            <input
+            type="text"
+            formControlName="email"
+            class="form-control xam-input-primary"
+            placeholder="Email"
+            [ngClass]="{ 'is-invalid': submitted && (f.email.errors || f.schoolAbbreviation.errors) }"
+            [readonly]="!isAdd" />
+
+            <div class="input-group-append">
+              <ng-select
+                class="xam-input-primary input-group-text"
+                placeholder="@example.edu"
+                [readonly]="!f.school_id.value || !isAdd"
+                formControlName="schoolAbbreviation"
+              >
+                <ng-option *ngFor="let abbreviation of getSchoolAbbreviation()" [value]="abbreviation">
+                  @{{ abbreviation }}
+                </ng-option>
+              </ng-select>
+            </div>
+
+            <!-- Email error -->
+            <div
+              *ngIf="submitted && f.email.errors"
+              class="invalid-feedback text-left"
+            >
+              <div *ngIf="f.email.errors.message">{{ f.email.errors!.message }}</div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- Password field -->
+        <div class="form-group col-sm-6 col-lg-5 ml-0 ml-lg-auto">
+          <label class="col-form-label">Password</label>
+          <div class="input-group">
+            <input
+              [type]="isShowPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="form-control xam-input-primary"
+              placeholder="Password"
+              [readonly]="true"
+            />
+
+            <div class="input-group-append">
+              <div class="input-group-text" *ngIf="isAdd">
+                <fa-icon
+                  [icon]="faRedo"
+                  class="color-red "
+                  type="button"
+                  (click)="randomizePassword()"
+                ></fa-icon>
+              </div>
+              <div class="input-group-text">
+                <fa-icon
+                  [icon]="faEye"
+                  class="color-red "
+                  [ngStyle]="{'opacity': isShowPassword ? '1' : '0.5'}"
+                  type="button"
+                  (click)="onChangePasswordState()"
+                ></fa-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- Country field -->
+        <div class="form-group col-sm-6 col-lg-5 mr-0 mr-lg-auto">
+          <label class="col-form-label col-form-label-sm">Select country</label>
+          <ng-select
+            placeholder="United States"
+            class="xam-input-primary"
+            [ngClass]="{ 'is-invalid': submitted && f.school_id.errors }"
+            (change)="onCountryChange()"
+            [readonly]="!isAdd"
+            [items]="selectValues.countries"
+            bindLabel="country_name"
+            bindValue="id"
+            formControlName="country_id"
+          >
+          </ng-select>
+
+          <!-- Country field error -->
+          <div
+            *ngIf="submitted && f.school_id.errors"
+            class="invalid-feedback text-left"
+          >
+            <div *ngIf="f.school_id.errors.required">Country is required</div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- School field -->
+        <div class="form-group col-sm-6 col-lg-5 ml-0 ml-lg-auto">
+          <label class="col-form-label col-form-label-sm">Select school</label>
+          <ng-select
+            formControlName="school_id"
+            placeholder="Harvard University"
+            class="xam-input-primary"
+            [ngClass]="{ 'is-invalid': submitted && f.school_id.errors }"
+            [readonly]="!isAdd || loadingSchools"
+            [items]="selectValues.schools"
+            bindLabel="school_name"
+            bindValue="id"
+            [loading]="loadingSchools"
+          >
+          </ng-select>
+
+          <!-- School field error -->
+          <div
+            *ngIf="submitted && f.school_id.errors"
+            class="invalid-feedback text-left"
+          >
+            <div *ngIf="f.school_id.errors.required">School is required</div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- Disciplines field -->
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="col-form-label col-form-label-sm">Disciplines</label>
+
+          <!-- Select fields loop -->
+          <div formArrayName="disciplines">
+            <div
+              *ngFor="
+                let control of getFormArray('disciplines').controls;
+                let i = index
+              "
+              class="mb-2 d-flex"
+            >
+              <!-- Select field -->
+              <div class="select-fields">
+                <ng-select
+                  [formControlName]="i"
+                  class="xam-input-primary"
+                  [ngClass]="{ 'is-invalid': submitted && control.errors }"
+                  placeholder="Discipline"
+                >
+                  <ng-option
+                    *ngFor="let discipline of getFilteredValues('disciplines', i)"
+                    [value]="discipline.id"
+                  >
+                    {{ discipline.name }}
+                  </ng-option>
+                </ng-select>
+
+                <!-- Discipline field error -->
+                <div
+                  *ngIf="submitted && control.errors"
+                  class="invalid-feedback text-left"
+                >
+                  <div *ngIf="control.errors.required">
+                    Discipline is required
+                  </div>
+                </div>
+              </div>
+
+              <!-- Delete field button -->
+              <fa-icon
+                [icon]="faTimes"
+                class="ml-2 mt-2"
+                role="button"
+                (click)="onDeleteSelect(getFormArray('disciplines'), i)"
+              ></fa-icon>
+            </div>
+          </div>
+
+          <!-- Add discipline button -->
+          <button
+            class="xam-btn-second add-field-btn"
+            (click)="onAddSelect(getFormArray('disciplines'))"
+            type="button"
+          >
+            Add
+          </button>
+        </div>
+
+
+
+
+
+        <!-- Levels field -->
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="col-form-label col-form-label-sm">Levels</label>
+
+          <!-- Select fields loop -->
+          <div formArrayName="levels">
+            <div
+              *ngFor="
+                let control of getFormArray('levels').controls;
+                let i = index
+              "
+              class="mb-2 d-flex"
+            >
+              <!-- Select field -->
+              <div class="select-fields">
+                <ng-select
+                  [formControlName]="i"
+                  class="xam-input-primary multiple-fields"
+                  [ngClass]="{ 'is-invalid': submitted && control.errors }"
+                  placeholder="Level"
+                >
+                  <ng-option
+                    *ngFor="let level of getFilteredValues('levels', i)"
+                    [value]="level.id"
+                  >
+                    {{ level.name }}
+                  </ng-option>
+                </ng-select>
+
+                <!-- Level field error -->
+                <div
+                  *ngIf="submitted && control.errors"
+                  class="invalid-feedback text-left"
+                >
+                  <div *ngIf="control.errors.required">Level is required</div>
+                </div>
+              </div>
+
+              <!-- Delete field button -->
+              <fa-icon
+                [icon]="faTimes"
+                class="ml-2 mt-2"
+                role="button"
+                (click)="onDeleteSelect(getFormArray('levels'), i)"
+              ></fa-icon>
+            </div>
+          </div>
+
+          <!-- Add level button -->
+          <button
+            class="xam-btn-second add-field-btn"
+            (click)="onAddSelect(getFormArray('levels'))"
+            type="button"
+          >
+            Add
+          </button>
+        </div>
+
+
+
+
+
+        <!-- Subjects field -->
+        <div class="form-group col-sm-6 col-md-4">
+          <label class="col-form-label col-form-label-sm">Subjects</label>
+
+          <!-- Select fields loop -->
+          <div formArrayName="subjects">
+            <div
+              *ngFor="
+                let control of getFormArray('subjects').controls;
+                let i = index
+              "
+              class="mb-2 d-flex"
+            >
+              <!-- Select field -->
+              <div class="select-fields">
+                <ng-select
+                  [formControlName]="i"
+                  class="xam-input-primary multiple-fields"
+                  [ngClass]="{ 'is-invalid': submitted && control.errors }"
+                  placeholder="Subject"
+                >
+                  <ng-option
+                    *ngFor="let subject of getFilteredValues('subjects', i)"
+                    [value]="subject.id"
+                  >
+                    {{ subject.name }}
+                  </ng-option>
+                </ng-select>
+
+                <!-- Level field error -->
+                <div
+                  *ngIf="submitted && control.errors"
+                  class="invalid-feedback text-left"
+                >
+                  <div *ngIf="control.errors.required">Subject is required</div>
+                </div>
+              </div>
+
+              <!-- Delete field button -->
+              <fa-icon
+                [icon]="faTimes"
+                class="ml-2 mt-2"
+                role="button"
+                (click)="onDeleteSelect(getFormArray('subjects'), i)"
+              ></fa-icon>
+            </div>
+          </div>
+
+          <!-- Add subject button -->
+          <button
+            class="xam-btn-second add-field-btn"
+            (click)="onAddSelect(getFormArray('subjects'))"
+            type="button"
+          >
+            Add
+          </button>
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="text-center w-100">
+          <button
+            type="submit"
+            class="xam-btn-second save-btn my-5"
+            [disabled]="submitting || loading"
+          >
+            <span
+              *ngIf="submitting"
+              class="spinner-border spinner-border-sm mr-1"
+            ></span
+            >Submit
+          </button>
+        </div>
+
+        <!-- Error section -->
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+        </div>
+    </form>
+
+    <!-- Background bottom graphic -->
+    <img
+      src="/assets/images/bg-main-bottom.svg"
+      class="img-fluid detail-background detail-background-bottom"
+    />
+  </div>
+
+  <!-- Background right graphic -->
+  <img
+    src="/assets/images/bg-main-right.svg"
+    class="
+      img-fluid
+      position-absolute
+      detail-background detail-background-right
+    "
+  />
+</div>

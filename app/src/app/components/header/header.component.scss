@@ -1,0 +1,91 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+.navbar-brand { // Design specification
+    font-size: 3.125rem;
+    font-family: "Recoleta-Medium";
+    font-weight: 600;
+    @media only screen and (max-width: 992px) { // Query to prevent header overflowing and breaking the entire page.
+      padding: 0;
+      font-size: 2.25rem; // Lower font-size
+    }
+}
+.nav-item {
+    font-family: "Recoleta-Medium";
+    padding: 0 0.313rem;
+    font-size: 1.294rem;
+
+    &:last-child {
+      padding: 0;
+      margin: 0;
+    }
+    @media only screen and (max-width: 1300px) { // Query to prevent header overflowing and breaking the entire page.
+      padding: 0;
+      font-size: 1rem; // Lower font-size
+    }
+    @media only screen and (max-width: 1060px) { // Query to prevent header overflowing and breaking the entire page.
+      padding: 0;
+      font-size: 0.8rem; // Lower font-size
+    }
+}
+.nav-link {
+    padding: 0 1rem;
+    color: unset !important;
+    height: 52px; // The header can contains the 2 buttons follow the design specification for buttons height.
+    line-height: 52px; // The text on header can be vertically center aligned.
+
+    &:hover {
+        color: var(--color-red) !important;
+    }
+
+    &.text-white {
+        color: white !important;
+    }
+}
+.btn-login {
+    border: 1px solid var(--color-red);
+    box-sizing: border-box;
+    border-radius: 10px;
+    @media only screen and (max-width: 768px) {
+        width: 300px;
+    }
+
+    &:hover {
+      background-color: var(--color-red);
+      color:white !important;
+    }
+    &.active { // Styling the 'Login' button when the user is on the login page
+        background: var(--color-red);
+        color: var(--color-black);
+    }
+}
+.btn-signup {
+    background: var(--color-red);
+    border-radius: 10px;
+    @media only screen and (max-width: 768px) {
+        width: 300px;
+        margin-top: 15px;
+    }
+    &:hover {
+        color: var(--color-black) !important;
+    }
+    &.active { // Styling the 'Sign Up' button when the user is on the sign up page
+        color: var(--color-black) !important;
+    }
+}
+.navbar {
+    padding: 0.8rem 80px; // Design specification for page horizontal margin
+    @media only screen and (max-width: 768px) {
+        padding: 0.8rem 40px;
+    }
+}
+.rec {
+    width: 139px; // Design specification for buttons width
+    text-align: center;
+    @media only screen and (max-width: 1200px) {
+      width: 100px;
+    }
+    @media only screen and (max-width: 992px) {
+      width: 80px;
+    }
+}

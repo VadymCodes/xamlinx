@@ -1,0 +1,63 @@
+.main {
+    margin-left: 5rem; // Page margin
+    margin-right: 5rem; // Page margin
+
+    @media only screen and (max-width: 768px) {
+        margin-left: 2.5rem; // Page margin for smaller viewport
+        margin-right: 2.5rem; // Page margin for smaller viewport
+    }
+}
+
+.content {
+    width: 85%;
+}
+
+.section-title {
+    margin-left: 1rem;
+    margin-top: 3.75rem;
+}
+
+button {
+    border: none;
+    background: none;
+    text-align: left;
+
+    span {
+      font-family: 'Recoleta-Medium';
+      font-size: 1.563rem;
+    }
+
+    fa-icon {
+        color: var(--color-red);
+    }
+}
+
+ul {
+    list-style-type: circle
+}
+
+// Overwritting Bootstrap's classes
+:host ::ng-deep {
+    .card {
+        background: transparent;
+        border-color: rgba(var(--color-red-rgb), 0.6);
+        border-radius: 1.688rem;
+    }
+
+    .card-header {
+        background: transparent;
+        margin: 0 0.625rem;
+        border: none;
+        border-top: 1px solid rgba(var(--color-red-rgb), 0.6);
+        padding: 1.875rem 0;
+    }
+
+    .card:first-child .card-header,
+    .card:not(:first-of-type) {
+        border-top: none;
+    }
+
+    .card-body {
+       padding: 0 1rem 1.875rem;
+    }
+}

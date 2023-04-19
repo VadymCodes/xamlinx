@@ -1,0 +1,33 @@
+main {
+    margin: 0 80px; // Page margin
+
+    @media only screen and (max-width: 768px) {
+      margin: 0 40px; // Page margin
+    }
+}
+
+.function-btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+}
+
+.icon-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    border: none;
+    background: none;
+    border-radius: 100%;
+
+    fa-icon {
+        opacity: 0.5;
+        color: var(--color-red);
+    }
+
+    &:hover {
+        background: rgba(var(--color-red-rgb), 0.2);
+
+        fa-icon {
+            opacity: 1;
+        }
+    }
+}

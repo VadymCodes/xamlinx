@@ -1,0 +1,89 @@
+<div class="app-requests container text-center">
+  <!-- Title -->
+  <h1 class="my-5">Requested Exams</h1>
+
+  <div class="text-left">
+    <!-- Upload button -->
+    <button *ngIf="canRequest" class="xam-btn-second my-3 request-button" (click)="goToNewRequest()">Request exam</button>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table class="table xam-table-primary">
+        <!-- Column -->
+        <thead>
+          <tr>
+            <th>Discipline</th>
+            <th>Level</th>
+            <th>Subject</th>
+            <th>Course Number</th>
+            <th>Supplies</th>
+            <th>Time left</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <!-- Rows -->
+        <tbody>
+          <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="8" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+          <!-- No result -->
+          <tr *ngIf="showingRequests.length === 0 && !loading">
+            <td colspan="8" class="text-center">No result</td>
+          </tr>
+
+          <!-- Row data -->
+          <tr *ngFor="let request of showingRequests">
+            <td>{{ request.discipline.name }}</td>
+            <td>{{ request.level.name }}</td>
+            <td>{{ request.subject.name }}</td>
+            <td>{{ request.course_number }}</td>
+            <td>{{ request.exams.length }}</td>
+            <td>
+              <span *ngIf="getTimeLeft(request) < 0;" class="badge badge-danger">passed</span>
+              <span *ngIf="getTimeLeft(request) == 0" class="badge badge-warning">today</span>
+              <span *ngIf="getTimeLeft(request) == 1" class="badge badge-warning">tomorrow</span>
+              <span *ngIf="getTimeLeft(request) >= 2" class="badge badge-success">{{ getTimeLeft(request) }} days</span>
+            </td>
+            <td>
+              <span *ngIf="request.dismissed_at" class="badge badge-warning">dismissed</span>
+              <span *ngIf="!request.dismissed_at" class="badge badge-success">active</span>
+            </td>
+            <td style="min-width: 100px;">
+              <button class="btn btn-primary btn-sm py-0" style="min-width: max-content" (click)="goToDetailRequest(request.id)">
+                <fa-icon [icon]="faEye"></fa-icon> View
+              </button>
+              <button *ngIf="request.exams.length>0 && !request.dismissed_at && !request.paid" class="btn btn-warning btn-sm py-0 ml-0 ml-md-2" style="min-width: max-content" (click)="dismiss(request.id)">
+                <fa-icon [icon]="faTimes"></fa-icon> Dismiss
+              </button>
+              <button *ngIf="request.exams.length==0" class="btn btn-danger btn-sm py-0 ml-0 ml-md-2" style="min-width: max-content" (click)="delete(request.id)">
+                <fa-icon [icon]="faTrash"></fa-icon> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Table footer -->
+    <div class="d-flex justify-content-between my-5">
+      <!-- Pagination -->
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRequests()">
+      </ngb-pagination>
+
+      <!-- Page size -->
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshRequests()">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="50">50 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>

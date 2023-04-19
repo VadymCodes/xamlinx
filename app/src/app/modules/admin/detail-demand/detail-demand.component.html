@@ -1,0 +1,92 @@
+<div class="container text-center">
+  <h1 class="my-4">Demand detail</h1>
+  <div class="table-responsive">
+    <table *ngIf="demand" class="table xam-table-primary">
+      <thead>
+        <tr>
+          <th scope="col">Student</th>
+          <th>Email</th>
+          <th>School</th>
+          <th>Discipline</th>
+          <th>Level</th>
+          <th>Subject</th>
+          <th>Course Number</th>
+          <th>Time left</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ demand.student.firstName + ' ' + demand.student.lastName }}</td>
+          <td>{{ demand.student.email }}</td>
+          <td>{{ demand.school.school_name }}</td>
+          <td>{{ demand.discipline.name }}</td>
+          <td>{{ demand.level.name }}</td>
+          <td>{{ demand.subject.name }}</td>
+          <td>{{ demand.course_number }}</td>
+          <td>
+            <span *ngIf="getTimeLeft(demand) < 0;" class="badge badge-danger">passed</span>
+            <span *ngIf="getTimeLeft(demand) == 0" class="badge badge-warning">today</span>
+            <span *ngIf="getTimeLeft(demand) == 1" class="badge badge-warning">tomorrow</span>
+            <span *ngIf="getTimeLeft(demand) >= 2" class="badge badge-success">{{ getTimeLeft(demand) }} days</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2 class="my-3">Matched exams</h2>
+  <div class="table-responsive">
+    <table *ngIf="demand" class="table xam-table-primary">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Grade Value</th>
+          <th>Payout</th>
+          <th>Verified</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="demand.matches.length==0">
+          <td colspan="6" class="text-center">No matches yet</td>
+        </tr>
+        <tr *ngFor="let match of demand.matches">
+          <td>{{ match.exam.student.firstName + ' ' + match.exam.student.lastName }}</td>
+          <td>{{ match.exam.student.email }}</td>
+          <td>{{ match.exam.grade_value }}</td>
+          <td>
+            <input *ngIf="match.status!='selected'" type="number" name="payout" id="payout" style="max-width: 70px;" 
+            [(ngModel)]="match.payout">
+            <input *ngIf="match.status=='selected'" type="number" name="payout" id="payout" style="max-width: 70px;" 
+            value="{{match.payout}}" disabled>
+          </td>
+          <td>
+            <span *ngIf="match.exam.verified" class="badge badge-success">Verified</span>
+            <span *ngIf="!match.exam.verified" class="badge badge-danger">Not verified</span>
+          </td>
+          <td>
+            <span *ngIf="match.status=='pending'" class="badge badge-info">New</span>
+            <span *ngIf="match.status=='selected'" class="badge badge-primary">Assigned</span>
+            <span *ngIf="match.status=='paid'" class="badge badge-success">Paid</span>
+          </td>
+          <td style="min-width: 100px;">
+            <button class="btn btn-primary btn-sm py-0" style="min-width: max-content" (click)="goToDetail(match.exam.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button *ngIf="match.status=='pending'" class="btn btn-success btn-sm py-0 ml-0 ml-md-2" style="min-width: max-content" (click)="assignExam(match.id, match.payout)" [disabled]="!match.exam.verified">
+              Assign
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center mt-3">
+    <button [disabled]="loading" class="xam-btn-second find-btn" (click)="findMatch()">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+      Find Matches
+    </button>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+  </div>
+</div>

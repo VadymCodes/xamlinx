@@ -1,0 +1,21 @@
+.app-forward-exam {
+    label {
+        font-family: "Recoleta-Medium";
+        font-size: 1.298rem;
+    }
+    .leave-btn {
+        @media only screen and (max-width: 768px) {
+            top: -50px;
+        }
+    }
+    .submit-btn {
+        width: 10.125rem;
+        height: 3.25rem;
+        font-size: 1.563rem;
+        span { // Loading symbol
+            width: 1rem;
+            height: 1rem;
+            margin-bottom: 0.6rem;
+        }
+    }
+}

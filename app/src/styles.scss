@@ -1,0 +1,265 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+/* Importing ng-select SCSS file. */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// General variables
+:root {
+  --primary-bg-color: #F9F7F3;
+  --color-black: #28203D;
+  --color-red: #FE8178;
+  --radius-primary: 14px;
+  --color-red-rgb: 254, 129, 120;
+}
+
+// Global Style
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
+@font-face {
+  font-family: "Recoleta";
+  src: url('/assets/fonts/Recoleta-RegularDEMO.otf');
+}
+@font-face {
+  font-family: "Recoleta-Regular";
+  src: url('/assets/fonts/Recoleta-Regular.ttf');
+}
+@font-face {
+  font-family: "Recoleta-Medium";
+  src: url('/assets/fonts/Recoleta-Medium.ttf');
+}
+@font-face {
+  font-family: "Recoleta-SemiBold";
+  src: url('/assets/fonts/Recoleta-SemiBold.woff');
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+    background-color: var(--primary-bg-color);
+    font-family: Nunito;
+    letter-spacing: 1%;
+    color: var(--color-black);
+    line-height: 1.4; // Design specification
+    font-size: 1.188rem; // Design specification
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Recoleta-Medium"
+}
+
+// Global Class
+.bg-red {
+    background-color: var(--color-red);
+}
+.color-red {
+    color : var(--color-red);
+}
+.xam-btn-primary {
+    border: 1px solid var(--color-red);
+    box-sizing: border-box;
+    border-radius: var(--radius-primary);
+    padding: 0.5rem 1.5rem;
+    font-family: "Recoleta-Medium";
+    background-color: transparent;
+    &:hover {
+        background-color: var(--color-red);
+        a {
+          color: white;
+        }
+    }
+    a {
+        color: var(--color-black);
+    }
+}
+.xam-btn-second {
+    background: var(--color-red);
+    color: white;
+    box-shadow: 0px 4px 10px -2px rgba(255, 129, 121, 0.4);
+    border-radius: var(--radius-primary);
+    padding: 0.5rem 1.5rem;
+    border: none;
+    font-family: "Recoleta-Medium";
+    &:disabled {
+        background-color: #d6c4c3;
+        cursor: not-allowed;
+    }
+    &:hover {
+        color: var(--color-black);
+        a {
+          color: var(--color-black);
+        }
+    }
+    a {
+        color: white;
+    }
+}
+.xam-input-primary {
+    border: 1px solid var(--color-red);
+    box-sizing: border-box;
+    border-radius: var(--radius-primary);
+    background-color: transparent;
+}
+.ng-select-container {
+    background-color: transparent !important;
+    border: none !important;
+}
+.xam-file-input {
+    border: 1px solid var(--color-red);
+    box-sizing: border-box;
+    border-radius: var(--radius-primary);
+    overflow: hidden;
+    height: 2.875rem; // Design specification
+    label {
+        border: none;
+        background-color: transparent;
+        height: 2.875rem;  // Design specification
+        &::after {
+            background: var(--color-red);
+            border-radius: 0.625rem; // Fill in small empty gap
+            color: white;
+            width: 8.563rem; // Design specification
+            height: 2.875rem; // Design specification
+            font-family: 'Recoleta';
+            text-align: center;
+            padding: 0;
+            line-height: 2.875rem; // Vertically align text
+        }
+    }
+}
+
+.xam-table-primary {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    text-align: left;
+    th, td {
+        padding-top: 0.688rem !important;
+        padding-bottom: 0.688rem !important;
+        &:first-child {
+            padding-left: 0.875rem !important;
+            border-top-left-radius: var(--radius-primary);
+            border-bottom-left-radius: var(--radius-primary);
+        }
+        &:last-child {
+            padding-right: 0.875rem !important;
+            border-bottom-right-radius: var(--radius-primary);
+            border-top-right-radius: var(--radius-primary);
+        }
+    }
+    th {
+        font-family: "Recoleta-Regular";
+        border-top: solid 1px var(--color-red) !important;
+        border-bottom: solid 1px var(--color-red) !important;
+        &:first-child {
+            border-left: 1px solid var(--color-red) !important;
+        }
+        &:last-child {
+            border-right: 1px solid var(--color-red) !important;
+        }
+    }
+    td {
+        background: rgba(144, 179, 249, 0.11);
+    }
+}
+.pagination {
+    border: 1px solid var(--color-red);
+    border-radius: var(--radius-primary);
+    .page-item {
+        &:first-child a {
+            border-left: none;
+        }
+        &:last-child a {
+            border-right: none;
+        }
+        &.active .page-link {
+            border-color: #dee2e6;
+            color: var(--color-black);
+        }
+        .page-link {
+            background: transparent !important;
+            border-top: none;
+            border-bottom: none;
+        }
+    }
+}
+.custom-select {
+    background-color: transparent;
+    border: 1px solid var(--color-red);
+    border-radius: var(--radius-primary);
+    font-size: 1.188rem; // Design specification
+}
+form label {
+    font-family: "Recoleta-Medium";
+}
+a:hover {
+  text-decoration: none; // Overwrite Bootstrap default 'a' hover behavior
+}
+.form-control, .ng-select { // Overwrite Bootstrap default behavior following the design specification
+    padding: 0.688rem 0.875rem;
+    font-size: 1.188rem;
+    height: 2.875rem;
+    &:focus {
+        background-color: unset !important;
+        border-color: var(--color-red) !important;
+        box-shadow: unset !important;
+    }
+}
+.ng-select { // Overwrite Bootstrap's select default behavior following the design specification
+    padding: 0.3rem 0.875rem;
+    height: 2.875rem;
+    font-size: 1.188rem;
+    .ng-value-container {
+        padding: 0 !important;
+    }
+}
+
+.xam-page-margin { // Global page margins
+    margin-left: 5rem;
+    margin-right: 5rem;
+
+    @media only screen and (max-width: 768px) {
+        margin-left: 2.5rem;
+        margin-right: 2.5rem;
+    }
+}
+
+.custom-file-label { // Overwrite Boostrap's class for custom file label
+    line-height: 1.7; // Vertically centering the label to the input box
+}
+// Wrapper to textarea to create custom resizer
+// Reference: https://stackoverflow.com/a/42869612
+.xam-textarea-wrap {
+    position: relative;
+
+    textarea {
+        position: relative;
+        &::-webkit-resizer {
+            display:none;
+        }
+    }
+
+    &::after {
+        content:"";
+        border-top: 2px solid #555;
+        width: 16px;
+        transform: rotate(-45deg);
+        background:transparent;
+        position: absolute;
+        right: 4px;
+        bottom: 12px;
+        pointer-events: none;
+        border-radius: 25%;
+    }
+
+    .xam-pull-tab {
+        border-top: 2px solid #555;
+        width:  10px;
+        transform: rotate(-45deg);
+        position: absolute;
+        bottom: 9px;
+        right: 4px;
+        pointer-events: none;
+        border-radius:  25%;
+  }
+}

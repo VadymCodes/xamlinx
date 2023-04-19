@@ -1,0 +1,15 @@
+<div class="container text-center">
+  <!-- Title -->
+  <h1 class="my-4">Your Purchase</h1>
+
+  <!-- Subtitle -->
+  <p *ngIf="paidStatus === 'success'" class="m-0"><b>Congratulation!</b> You successfully purchased this Mock Exam.</p>
+  <p *ngIf="paidStatus === 'success'" class="m-0">Now let’s get prepared!</p>
+
+  <p *ngIf="paidStatus === 'cancel'" class="m-0">Unfortunatelly something went wrong...</p>
+  <p *ngIf="paidStatus === 'cancel'" class="m-0"><b>Your payment failed.</b> Please try again.</p>
+
+  <!-- Image -->
+  <img *ngIf="paidStatus === 'success'" src="/assets/images/purchase_success_background.svg" class="my-2">
+  <img *ngIf="paidStatus === 'cancel'" src="/assets/images/purchase_failure_background.svg" class="my-2">
+</div>

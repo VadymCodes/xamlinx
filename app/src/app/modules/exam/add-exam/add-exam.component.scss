@@ -1,0 +1,68 @@
+.app-exam {
+    margin: 3rem auto 7rem;
+    width: 60%;
+    max-width: 59rem; // Prevent the background edge to be misalined
+    @media only screen and (max-width: 992px) {
+        width: 80%;
+    }
+    @media only screen and (max-width: 768px) {
+        width: 100%;
+    }
+    .col-form-label {
+        font-family: "Recoleta-Medium";
+        font-size: inherit !important;
+    }
+    h1 {
+        font-size: 2.75rem;
+        @media only screen and (max-width: 768px) {
+            margin-top: 3.125rem; // Prevent the leave button to be clipped
+        }
+    }
+    .form-wrapper {
+        background-color: #edf0f4;
+        max-height: 72.5rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        @media only screen and (max-width: 768px) {
+            padding: 0 5%;
+        }
+    }
+    .leave-btn {
+        top: 0.375rem;
+        @media only screen and (max-width: 768px) {
+            top: -3.125rem;
+        }
+    }
+    .exam-background { // Styling the background corner graphic
+        &-image {
+          top: 50%;
+          left: 55%;
+          transform: translate(-50%, -50%);
+          width: 80%;
+          pointer-events: none; // Allow the inputs on top to be clickable
+        }
+        &-left {
+            height: 100%;
+            right: 100%;
+          }
+          &-right {
+            height: 100%;
+            left: 100%;
+        }
+        @media only screen and (max-width: 768px) {
+            &-left {
+                width: 0;
+            }
+            &-right {
+                width: 0;
+            }
+        }
+    }
+    .upload-bt { // Design specification
+        width: 13.313rem;
+        height: 3.25rem;
+        padding: 0; // Ensuring correct size
+        font-size: 1.563rem;
+        font-family: 'Recoleta';
+    }
+}

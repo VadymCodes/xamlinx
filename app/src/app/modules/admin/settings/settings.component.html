@@ -1,0 +1,264 @@
+<!-- Desktop viewport -->
+<div
+  class="app-setting app-setting-large row"
+  *ngIf="!screenTablet && !screenMobile"
+>
+  <div class="col-4">
+    <div
+      class="
+        setting-container setting-container-large
+        d-flex
+        flex-column
+        text-center
+        position-relative
+      "
+    >
+      <h1>Settings</h1>
+      <div class="nav-container flex-grow-1 overflow-auto">
+        <div class="nav-item position-relative">
+          <!-- Conditional rendering workaround to "close/open" table -->
+          <a
+            [routerLink]="['/admin', 'settings', 'available-methods']"
+            *ngIf="!onAvailablePage"
+          >
+            <button class="xam-btn-second">Available Payment Methods</button>
+            <fa-icon
+              class="position-absolute nav-icon"
+              [icon]="getCaretIcon(onAvailablePage)"
+            ></fa-icon>
+          </a>
+          <a [routerLink]="['/admin', 'settings']" *ngIf="onAvailablePage">
+            <button class="xam-btn-second">Available Payment Methods</button>
+            <fa-icon
+              class="position-absolute nav-icon"
+              [icon]="getCaretIcon(onAvailablePage)"
+            ></fa-icon>
+          </a>
+        </div>
+
+        <div class="nav-item position-relative" (click)="onConstantsClick()">
+          <button class="xam-btn-second">Business Constants</button>
+          <fa-icon
+            class="position-absolute nav-icon"
+            [icon]="getCaretIcon(isConstantsOpen)"
+          ></fa-icon>
+        </div>
+
+        <div class="nav-item position-relative" (click)="onExtensionsClick()">
+          <button class="xam-btn-second">School Extensions</button>
+          <fa-icon
+            class="position-absolute nav-icon"
+            [icon]="getCaretIcon(isExtensionsOpen)"
+          ></fa-icon>
+        </div>
+
+        <div class="nav-item position-relative">
+          <!-- Conditional rendering workaround to "close/open" table -->
+          <a
+            [routerLink]="['/admin', 'settings', 'watermark']"
+            *ngIf="!onWatermarkPage"
+          >
+            <button class="xam-btn-second">Watermark</button>
+            <fa-icon
+              class="position-absolute nav-icon"
+              [icon]="getCaretIcon(onWatermarkPage)"
+            ></fa-icon>
+          </a>
+          <a [routerLink]="['/admin', 'settings']" *ngIf="onWatermarkPage">
+            <button class="xam-btn-second">Watermark</button>
+            <fa-icon
+              class="position-absolute nav-icon"
+              [icon]="getCaretIcon(onWatermarkPage)"
+            ></fa-icon>
+          </a>
+        </div>
+      </div>
+      <app-school-extensions *ngIf="isExtensionsOpen"></app-school-extensions>
+      <app-business-constants *ngIf="isConstantsOpen"></app-business-constants>
+    </div>
+  </div>
+  <div class="col-8">
+    <app-events *ngIf="onEventsPage"></app-events>
+    <app-available-methods *ngIf="onAvailablePage"></app-available-methods>
+    <app-watermark *ngIf="onWatermarkPage"></app-watermark>
+  </div>
+</div>
+
+<!-- Tablet viewport -->
+<div
+  class="app-setting app-setting-medium container text-center"
+  *ngIf="screenTablet"
+>
+  <h1 class="mt-5 mb-3">Settings</h1>
+
+  <div
+    class="
+      setting-container setting-container-medium
+      overflow-auto
+      d-flex
+      flex-column
+    "
+  >
+    <div class="nav-item position-relative">
+      <a [routerLink]="['/admin', 'settings']">
+        <button class="xam-btn-second">Events</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onEventsPage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-events *ngIf="onEventsPage"></app-events>
+
+    <div class="nav-item position-relative">
+      <a
+        [routerLink]="['/admin', 'settings', 'available-methods']"
+        *ngIf="!onAvailablePage"
+      >
+        <button class="xam-btn-second">Available Payment Methods</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onAvailablePage)"
+        ></fa-icon>
+      </a>
+      <a [routerLink]="['/admin', 'settings']" *ngIf="onAvailablePage">
+        <button class="xam-btn-second">Available Payment Methods</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onAvailablePage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-available-methods *ngIf="onAvailablePage"></app-available-methods>
+
+    <div class="nav-item position-relative" (click)="onConstantsClick()">
+      <button class="xam-btn-second">Business Constants</button>
+      <fa-icon
+        class="position-absolute nav-icon"
+        [icon]="getCaretIcon(isConstantsOpen)"
+      ></fa-icon>
+    </div>
+
+    <app-business-constants *ngIf="isConstantsOpen"></app-business-constants>
+
+    <div class="nav-item position-relative" (click)="onExtensionsClick()">
+      <button class="xam-btn-second">School Extensions</button>
+      <fa-icon
+        class="position-absolute nav-icon"
+        [icon]="getCaretIcon(isExtensionsOpen)"
+      ></fa-icon>
+    </div>
+
+    <app-school-extensions *ngIf="isExtensionsOpen"></app-school-extensions>
+
+    <div class="nav-item position-relative">
+      <a
+        [routerLink]="['/admin', 'settings', 'watermark']"
+        *ngIf="!onWatermarkPage"
+      >
+        <button class="xam-btn-second">Watermarks</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onWatermarkPage)"
+        ></fa-icon>
+      </a>
+      <a [routerLink]="['/admin', 'settings']" *ngIf="onWatermarkPage">
+        <button class="xam-btn-second">Watermarks</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onWatermarkPage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-watermark *ngIf="onWatermarkPage"></app-watermark>
+  </div>
+</div>
+
+<!-- Mobile viewport -->
+<div
+  class="app-setting app-setting-small container text-center"
+  *ngIf="screenMobile"
+>
+  <h1 class="mt-5 mb-3">Settings</h1>
+
+  <div class="setting-container setting-container-small d-flex flex-column">
+    <div class="nav-item position-relative">
+      <a [routerLink]="['/admin', 'settings']">
+        <button class="xam-btn-second">Events</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onEventsPage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-events *ngIf="onEventsPage"></app-events>
+
+    <div class="nav-item position-relative">
+      <a
+        [routerLink]="['/admin', 'settings', 'available-methods']"
+        *ngIf="!onAvailablePage"
+      >
+        <button class="xam-btn-second">Available Payment Methods</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onAvailablePage)"
+        ></fa-icon>
+      </a>
+      <a [routerLink]="['/admin', 'settings']" *ngIf="onAvailablePage">
+        <button class="xam-btn-second">Available Payment Methods</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onAvailablePage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-available-methods *ngIf="onAvailablePage"></app-available-methods>
+
+    <div class="nav-item position-relative" (click)="onConstantsClick()">
+      <button class="xam-btn-second">Business Constants</button>
+      <fa-icon
+        class="position-absolute nav-icon"
+        [icon]="getCaretIcon(isConstantsOpen)"
+      ></fa-icon>
+    </div>
+
+    <app-business-constants *ngIf="isConstantsOpen"></app-business-constants>
+
+    <div class="nav-item position-relative" (click)="onExtensionsClick()">
+      <button class="xam-btn-second">School Extensions</button>
+      <fa-icon
+        class="position-absolute nav-icon"
+        [icon]="getCaretIcon(isExtensionsOpen)"
+      ></fa-icon>
+    </div>
+
+    <app-school-extensions *ngIf="isExtensionsOpen"></app-school-extensions>
+
+    <div class="nav-item position-relative">
+      <a
+        [routerLink]="['/admin', 'settings', 'watermark']"
+        *ngIf="!onWatermarkPage"
+      >
+        <button class="xam-btn-second">Watermarks</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onWatermarkPage)"
+        ></fa-icon>
+      </a>
+      <a [routerLink]="['/admin', 'settings']" *ngIf="onWatermarkPage">
+        <button class="xam-btn-second">Watermarks</button>
+        <fa-icon
+          class="position-absolute nav-icon"
+          [icon]="getCaretIcon(onWatermarkPage)"
+        ></fa-icon>
+      </a>
+    </div>
+
+    <app-watermark *ngIf="onWatermarkPage"></app-watermark>
+  </div>
+</div>

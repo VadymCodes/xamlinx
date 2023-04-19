@@ -1,0 +1,70 @@
+<div class="app-payouts container text-center">
+  <!-- Title -->
+  <h1 class="my-3">Payouts</h1>
+
+  <!-- Method buttons -->
+  <div class="btn-group my-4" role="group" aria-label="Basic example">
+    <button
+      type="button"
+      [ngClass]="{ 'xam-btn-primary': selectedMethod === 'transferwise', 'xam-btn-second': selectedMethod === 'paypal' }"
+      class="xam-btn-primary"
+      (click)="selectPaymentMethod('paypal')">PayPal</button>
+    <button
+      type="button"
+      class="ml-3"
+      [ngClass]="{ 'xam-btn-primary': selectedMethod === 'paypal', 'xam-btn-second': selectedMethod === 'transferwise' }"
+      (click)="selectPaymentMethod('transferwise')">TransferWise</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>Recipient</th>
+          <th>Contact Email</th>
+          <th>Country</th>
+          <th>Payment Email</th>
+          <th>Payment Option</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="6" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="visibleMatches.length === 0 && !loading">
+          <td colspan="6" class="text-center">No result</td>
+        </tr>
+
+        <tr *ngFor="let match of visibleMatches">
+          <td>{{ match.exam.student.firstName + ' ' + match.exam.student.lastName }}</td>
+          <td>{{ match.exam.student.email }}</td>
+          <td>{{ match.exam.school.country.country_name }}</td>
+          <td>{{ match.payment_email }}</td>
+          <td>{{ match.payment_type }}</td>
+          <td>{{ match.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Payout button -->
+  <form [formGroup]="payoutForm" class="my-5" (ngSubmit)="payout()">
+    <button [disabled]="submitting" class="xam-btn-second mr-3">
+      <span *ngIf="submitting" class="spinner-border spinner-border-sm" [ngStyle]="{ 'margin-bottom': '0.3rem' }"></span>
+      Payout
+    </button>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+  </form>
+</div>

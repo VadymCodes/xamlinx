@@ -1,0 +1,65 @@
+<form
+  [formGroup]="form"
+  class="
+    main-container
+    d-flex
+    flex-column
+    justify-content-center
+    align-items-center
+    text-center
+  "
+  (ngSubmit)="onSubmit()"
+>
+  <!-- Countries select field -->
+  <div class="form-group">
+    <label for="school">Select constant</label>
+
+    <div class="w-100 text-center" *ngIf="false">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <ng-select
+      class="xam-input-primary members-select"
+      placeholder="MAX_GROUP_MEMBERS_COUNT"
+      formControlName="constant"
+      [loading]="fetching"
+    >
+      <ng-option *ngFor="let constant of constants" [value]="constant">
+        {{ constant.const_name }}
+      </ng-option>
+    </ng-select>
+  </div>
+
+  <!-- Current value fields -->
+  <div class="form-group d-flex flex-column align-items-center">
+    <label for="current-value">Current value</label>
+
+    <input
+      id="current-value"
+      type="text"
+      class="xam-input-primary value-input"
+      placeholder="2"
+      formControlName="oldValue"
+      readonly
+    />
+  </div>
+
+  <!-- New value fields -->
+  <div class="form-group d-flex flex-column align-items-center">
+    <label for="new-value">New value</label>
+
+    <input
+      id="new-value"
+      type="text"
+      class="xam-input-primary value-input"
+      placeholder="1"
+      formControlName="newValue"
+    />
+  </div>
+
+  <button class="xam-btn-second" [disabled]="form.invalid || submitting">
+    Save changes
+  </button>
+</form>

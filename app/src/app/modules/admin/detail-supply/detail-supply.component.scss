@@ -1,0 +1,72 @@
+.app-detail-supply {
+    width: 70%;
+    max-width: 56.25rem; // Prevent the background edge to be misalined
+    @media only screen and (max-width: 992px) {
+        width: 90%;
+    }
+    @media only screen and (max-width: 768px) {
+        width: 100%;
+    }
+    label { // Design specification
+        font-family: "Recoleta-Regular";
+        font-size: 1.298rem;
+        font-weight: bold;
+    }
+    h1 {
+        font-size: 2.75rem; // Design specification
+        margin-top: -1.5rem;
+        margin-bottom: 3.875rem;
+    }
+    a {
+        line-break: anywhere;
+    }
+    .wrapper {
+        background-color: #edf0f4;
+        padding: 0 10%;
+        min-height: 60.875rem;
+        @media only screen and (max-width: 768px) {
+            padding: 0 5%;
+        }
+    }
+    .detail-background { // Styling the background corner graphic
+        &-image {
+          top: 50%;
+          left: 55%;
+          transform: translate(-50%, -50%);
+          width: 80%;
+        }
+        &-left {
+            height: 100%;
+            right: 100%;
+          }
+          &-right {
+            height: 100%;
+            left: 100%;
+        }
+        @media only screen and (max-width: 768px) {
+            &-left {
+                width: 0;
+            }
+            &-right {
+                width: 0;
+            }
+      }
+    }
+    .xam-btn-second { // Design specification
+        height: 3.25rem;
+        font-size: 1.563rem;
+        font-family: 'Recoleta-Regular';
+        &.verified-btn {
+            width: 16rem;
+        }
+        &.upload-btn {
+            width: 18.25rem;
+        }
+    }
+    .leave-btn {
+        top: 0.375rem;
+        @media only screen and (max-width: 768px) {
+            top: -2.5rem;
+        }
+    }
+}

@@ -1,0 +1,218 @@
+<section class="hero">
+  <!-- Background graphic -->
+  <img src="/assets/images/Background_Hero.svg" class="position-absolute hero-background">
+
+  <div class="d-flex flex-column flex-lg-row align-items-center align-items-lg-end justify-content-md-between position-relative">
+    <div class="hero-text">
+      <h1>Prepare for <span class="color-red">success</span></h1>
+      <h4 class="mt-4">Redesigned test prep experience created by A+ students.</h4>
+      <p class="mt-3">All you need for your next exam is here. Learn from the A students who already passed the test and prepared for you a version that helps you get higher score on your exam!</p>
+      <button class="xam-btn-second mt-4">
+        <a routerLink="/requests">Prepare now</a>
+      </button>
+    </div>
+    <div class="position-relative mt-5 mt-lg-0 mr-xl-5">
+      <img src="/assets/images/Hero.png" class="hero-graphic">
+      <img src="/assets/images/Illustration_Hero_Arrow.png" class="position-absolute hero-arrow">
+    </div>
+  </div>
+</section>
+<!-- About Us section -->
+<div id="about">
+  <section #aboutSection class="introduction text-center" [ngClass]="{'fade-in': aboutAnimated}">
+    <!-- Main title -->
+    <h1 class="mx-auto"><span class="color-red">Xamlinx</span> is a first platform that help students prepare for exams while it rewards the A+ students</h1>
+
+    <!-- Subtitle -->
+    <p class="mt-4 mb-0 mx-auto">We provide subject-specific <b>mock exams</b> created by high-scoring students of those subjects. You can now take your next exam with confidence, knowing that you have <b>prepared like a boss</b>, or you can be <b>rewarded for contributing</b> to the success of your peers!</p>
+
+    <!-- Selling points -->
+    <div class="row text-left mx-auto points-container">
+      <div class="col-sm-6 mt-md-2 pl-md-5 d-flex align-items-center">
+        <img src="/assets/images/AboutUs_Points.png" class="img-fluid">
+        <span class="point-text ml-3">Mock exams by high scorers</span>
+      </div>
+      <div class="col-sm-6 mt-2 pl-md-5 d-flex align-items-center">
+        <img src="/assets/images/AboutUs_Points.png" class="img-fluid">
+        <span class="point-text ml-3">Efficient process</span>
+      </div>
+      <div class="col-sm-6 mt-2 pl-md-5 mt-md-4 d-flex align-items-center">
+        <img src="/assets/images/AboutUs_Points.png" class="img-fluid">
+        <span class="point-text ml-3">Rewards high scorers</span>
+      </div>
+      <div class="col-sm-6 mt-2 pl-md-5 mt-md-4 d-flex align-items-center">
+        <img src="/assets/images/AboutUs_Points.png" class="img-fluid">
+        <span class="point-text ml-3">Affordable & reasonable</span>
+      </div>
+    </div>
+
+    <!-- Call-to-action button -->
+    <button class="xam-btn-primary">
+      <a routerLink="/signup">Join for free</a>
+    </button>
+  </section>
+</div>
+<!-- How it works section -->
+<section class="how-it-works text-center" id="how-it-works">
+  <!-- Top background graphic -->
+  <img src="/assets/images/Background_howitworks_top.svg" class="works-bg-top t-0">
+
+  <div class="outter-container">
+    <!-- Title -->
+    <h1>How it works</h1>
+    <p class="mx-auto my-3 work-sub"><b>Xamlinx</b> works in two ways: you either provide or request a mock exam, or both! Follow the steps below and start your journey today. <b>Get prepared and reward!</b></p>
+
+    <!-- Subsection labels container -->
+    <div class="row mt-5">
+      <div class="col">
+        <div class="h-100 d-flex flex-column align-items-center">
+          <p class="flex-grow-1" style="width: 80%;">If you <b>score above 92%</b> on your exams and want to <b>get rewarded</b> for your hard work </p>
+          <button class="xam-btn-primary bg-light border-0 px-5 py-3 mt-4" [ngClass]="{'selected': selectedWorksSection === 'PROVIDE'}" (click)="selectWorksSection('PROVIDE')">
+            <h2 class="color-red m-0">Provide</h2>
+            <h5 class="m-0">Mock Exam</h5>
+          </button>
+        </div>
+      </div>
+
+      <div class="col mt-md-0 mt-4">
+        <div class="h-100 d-flex flex-column align-items-center">
+          <p class="flex-grow-1" style="width: 80%;">If you want to <b>prepare well</b> and <b>feel confidend</b> on your next exam</p>
+          <button class="xam-btn-primary bg-light border-0 px-5 py-3 mt-4" [ngClass]="{'selected': selectedWorksSection === 'REQUEST'}" (click)="selectWorksSection('REQUEST')">
+            <h2 class="color-red m-0">Request</h2>
+            <h5 class="m-0">Mock Exam</h5>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Provide mock exam subsection -->
+    <div class="row m-auto point-container" *ngIf="selectedWorksSection === 'PROVIDE'">
+      <div class="col-md-6 mt-5 pt-5 d-flex flex-column flex-md-row">
+        <h3 class="point-number">1</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Register</h4>
+          <p class="m-0 text-break">Using your educational institution email address (e.g. john.doe@education.edu).</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">2</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Supply your Mock Exam</h4>
+          <p class="m-0 text-break">Enter the details of your exam so that we would be able to match it to a request.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">3</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Upload your Mock Exam</h4>
+          <p class="m-0 text-break">When we have found a match to your supply, we will contact you so that you may make the actual uploads.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">4</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Receive your Reward!</h4>
+          <p class="m-0 text-break">Once your exam is selected, you will receive a monetary incentive ranging anywhere from USD 10 to USD 20, depending on the composition mode (single vs. group) of the mock exam you provided.
+          </p>
+        </div>
+      </div>
+    </div>
+
+      <!-- Request mock exam subsection -->
+    <div class="row m-auto point-container" *ngIf="selectedWorksSection === 'REQUEST'">
+      <div class="col-md-6 mt-5 pt-5 py-3 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">1</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Register</h4>
+          <p class="m-0 text-break">Using your educational institution email address (e.g. john.doe@education.edu).</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 py-3 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">2</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Provide details</h4>
+          <p class="m-0 text-break">You will be able to have fine-grained control over the type of mock exam you are looking for while always having the option to explore exams from other schools.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 py-3 d-flex  flex-column flex-md-row">
+        <h3 class="point-number">3</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Let our System do the work</h4>
+          <p class="m-0 text-break">After you have provided us with the specifics of the mock exam you are looking for, just sit back, relax, and let our system find you a match! You might even get several mock exams for you to choose from!</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 mt-5 pt-5 py-3 d-flex flex-column flex-md-row">
+        <h3 class="point-number">4</h3>
+        <div class="point-content pl-3 text-left">
+          <h4 class="mt-3 mb-2">Get it only if you like it</h4>
+          <p class="m-0 text-break">Once we provide you with one or more mock exams matching your request criteria, you will always have the option to view a sample section of the material before you decide on whether or not to acquire it as a whole.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom background graphic -->
+  <img src="/assets/images/Background_howitworks_bottom.svg" class="works-bg-bottom b-0">
+</section>
+
+<!-- Testimonial section -->
+<section class="testimonials text-center">
+  <!-- Graphic image -->
+  <img src="/assets/images/Testimonies.png">
+
+  <!-- Main title -->
+  <h1><span class="color-red">Xamlinx’s</span> goal is to instill confidence</h1>
+
+  <!-- Subtitle -->
+  <p>Learn what our users have to say about Xamlinx - the first test prep experience created by A+ students for their peers.</p>
+
+  <!-- Subsections -->
+  <div class="row mt-5 testimonials-sub justify-content-between">
+
+    <!-- First subsection -->
+    <div class="col-lg-4 mt-4">
+      <div class="testimonial-card px-4 pt-5 pb-4 mx-4 d-flex flex-column justify-content-between">
+        <q class="font-weight-bold">Finally a platform that rewards our hard work while helping our collegues, great algorythyms and easy usablity!</q>
+        <p class="mt-3 mb-0">Anna from Yale</p>
+      </div>
+    </div>
+
+    <!-- Second subsection -->
+    <div class="col-lg-4 mt-4">
+      <div class="testimonial-card px-4 pt-5 pb-4 mx-4 d-flex flex-column justify-content-between">
+        <q class="font-weight-bold">It helped my get through my last semester - I was never THAT prepared in my life! Amazing platform, we all just get wiser</q>
+        <p class="mt-3 mb-0">Simon from NTU</p>
+      </div>
+    </div>
+
+    <!-- Third subsection -->
+    <div class="col-lg-4 mt-4">
+      <div class="testimonial-card px-4 pt-5 pb-4 mx-4 d-flex flex-column justify-content-between">
+        <q class="font-weight-bold">Totally recommended - right mock exams and you can learn so much more!</q>
+        <p class="mt-3 mb-0">Joan from ULC</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Call-to-action section -->
+<section class="ready-success my-5">
+  <div class="position-relative text-center">
+    <!-- Graphic image -->
+    <img src="/assets/images/Ready_forsucess.png" class="img-fluid">
+
+    <!-- Title and button -->
+    <div class="centered">
+      <h1>Ready for success?</h1>
+      <button class="xam-btn-second mt-4">
+        <a routerLink="/signup" class="h5">Join now</a>
+      </button>
+    </div>
+  </div>
+</section>

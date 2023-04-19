@@ -1,0 +1,306 @@
+<div class="app-request d-flex text-center position-relative">
+  <!-- Background left graphic -->
+  <img src="/assets/images/bg-main-left.svg" class="img-fluid position-absolute request-background request-background-left" />
+
+  <div class="d-flex flex-column w-100" style="height: min-content">
+    <!-- Background top graphic -->
+    <img src="/assets/images/bg-main-top.svg" class="img-fluid request-background request-background-top" />
+
+    <div class="form-wrapper">
+      <!-- Title -->
+      <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+      <div class="mx-auto position-relative">
+        <div class="position-absolute left-0 leave-btn">
+          <app-leave-button></app-leave-button>
+        </div>
+        <h1 class="mb-1 mt-sm-5 mt-0">Request new exam</h1>
+        <p>and get prepared!</p>
+      </div>
+
+      <!-- Form -->
+      <div class="mx-auto my-4">
+        <form [formGroup]="requestForm" (ngSubmit)="onSubmit()" class="text-left">
+          <div class="row">
+            <div class="col form-group">
+              <!-- Discipline field -->
+              <label for="disciplineId" class="col-form-label col-form-label-sm">Discipline</label>
+              <ng-select
+                formControlName="disciplineId"
+                placeholder="Select discipline"
+                class="xam-input-primary"
+                [ngClass]="{ 'is-invalid': submitted && f.disciplineId.errors }">
+                <ng-option *ngFor="let discipline of disciplines" [value]="discipline.id">
+                  {{discipline.name}}
+                </ng-option>
+              </ng-select>
+
+              <!-- Discipline errors -->
+              <div *ngIf="submitted && f.disciplineId.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.disciplineId.errors.required">Discipline is required</div>
+              </div>
+            </div>
+
+            <div class="col form-group">
+              <!-- Level field -->
+              <label for="levelId" class="col-form-label col-form-label-sm">Level</label>
+              <ng-select
+                formControlName="levelId"
+                placeholder="Select level"
+                class="xam-input-primary"
+                [ngClass]="{ 'is-invalid': submitted && f.levelId.errors }">
+                <ng-option *ngFor="let level of levels" [value]="level.id">
+                  {{level.name}}
+                </ng-option>
+              </ng-select>
+
+              <!-- Level error -->
+              <div *ngIf="submitted && f.levelId.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.levelId.errors.required">Level is required</div>
+              </div>
+            </div>
+
+            <div class="col form-group">
+              <!-- Subject field -->
+              <label for="subjectId" class="col-form-label col-form-label-sm">Subject</label>
+              <ng-select
+                formControlName="subjectId"
+                placeholder="Select subject"
+                class="xam-input-primary"
+                [ngClass]="{ 'is-invalid': submitted && f.subjectId.errors }">
+                <ng-option *ngFor="let subject of subjects" [value]="subject.id">
+                  {{subject.name}}
+                </ng-option>
+              </ng-select>
+
+              <!-- Subject error -->
+              <div *ngIf="submitted && f.subjectId.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.subjectId.errors.required">Subject is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <!-- Exam duration field -->
+              <label for="duration" class="col-form-label col-form-label-sm">Exam duration</label>
+              <ng-select
+                formControlName="duration"
+                class="xam-input-primary"
+                placeholder="Select duration">
+                <ng-option *ngFor="let duration of durations" [value]="duration.value">
+                  {{duration.name}}
+                </ng-option>
+              </ng-select>
+            </div>
+
+            <div class="col form-group">
+              <!-- Year field -->
+              <label for="year" class="col-form-label col-form-label-sm">Year Condition</label>
+              <ng-select
+                formControlName="yearCondition"
+                class="xam-input-primary"
+                [clearable]="false"
+                [searchable]="false">
+                <ng-option value="before">Before</ng-option>
+                <ng-option value="exactly">Exactly</ng-option>
+                <ng-option value="after">After</ng-option>
+              </ng-select>
+            </div>
+
+            <div class="col form-group">
+              <!-- Year field -->
+              <label for="year" class="col-form-label col-form-label-sm">Year</label>
+              <ng-select
+                formControlName="year"
+                class="xam-input-primary"
+                placeholder="Select year">
+                <ng-option *ngFor="let year of years" [value]="year.value">
+                  {{year.name}}
+                </ng-option>
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col form-group">
+              <!-- Semester field -->
+              <label for="semester" class="col-form-label col-form-label-sm">Semester</label>
+              <ng-select
+                formControlName="semester"
+                class="xam-input-primary"
+                placeholder="Select semester">
+                <ng-option *ngFor="let semester of semesters" [value]="semester.value">
+                  {{semester.name}}
+                </ng-option>
+              </ng-select>
+            </div>
+
+            <div class="col form-group">
+              <!-- Maximum delay field -->
+              <label for="delay" class="col-form-label col-form-label-sm">Maximum Delay</label>
+              <ng-select
+                formControlName="delay"
+                placeholder="Select delay"
+                class="xam-input-primary"
+                [ngClass]="{ 'is-invalid': submitted && f.delay.errors }">
+                <ng-option *ngFor="let delay of delays" [value]="delay.value">
+                  {{delay.name}}
+                </ng-option>
+              </ng-select>
+
+              <!-- Maximum delay error -->
+              <div *ngIf="submitted && f.delay.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.delay.errors.required">This field is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col form-group">
+              <!-- Course number field -->
+              <label for="courseNum" class="col-form-label col-form-label-sm">Course Number</label>
+              <input
+                id="courseNum"
+                type="text"
+                formControlName="courseNum"
+                class="form-control xam-input-primary"
+                placeholder="Course Number"
+                [ngClass]="{ 'is-invalid': submitted && f.courseNum.errors }">
+
+                <!-- Course number error -->
+                <div *ngIf="submitted && f.courseNum.errors" class="invalid-feedback text-left">
+                  <div *ngIf="f.courseNum.errors.pattern">Only letters, numbers, and hyphens are allowed!</div>
+                </div>
+            </div>
+
+            <div class="col form-group">
+              <!-- Exam number field -->
+              <label for="examNumber" class="col-form-label col-form-label-sm">Exam Number</label>
+              <ng-select
+                formControlName="examNumber"
+                placeholder="Select number"
+                class="xam-input-primary"
+                [ngClass]="{ 'is-invalid': submitted && f.examNumber.errors }">
+                <ng-option *ngFor="let examNumber of examNumbers" [value]="examNumber">
+                  {{ examNumber }}
+                </ng-option>
+              </ng-select>
+
+              <!-- Exam number error -->
+              <div *ngIf="submitted && f.examNumber.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.examNumber.errors.required">Exam Number is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4 form-group">
+              <!-- Professor email field -->
+              <label for="profEmail" class="col-form-label col-form-label-sm">Professor Email</label>
+              <input
+                type="email"
+                id="profEmail"
+                formControlName="profEmail"
+                class="form-control xam-input-primary"
+                placeholder="Professor Email"
+                (change)="onSearchProf(f.profEmail.value)"
+                [ngClass]="{ 'is-invalid': submitted && f.profEmail.errors }">
+              <div *ngIf="submitted && f.profEmail.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profEmail.errors.email">Invalid email provided</div>
+              </div>
+            </div>
+
+            <div class="col-sm-4 form-group">
+              <!-- Professor first name field -->
+              <label for="profFirstName" class="col-form-label col-form-label-sm">Professor First Name</label>
+              <input
+                id="profFirstName"
+                type="text"
+                formControlName="profFirstName"
+                class="form-control xam-input-primary"
+                placeholder="First Name">
+            </div>
+
+            <div class="col-sm-4 form-group">
+              <!-- Professor last name field -->
+              <label for="profLastName" class="col-form-label col-form-label-sm">Professor Last Name</label>
+              <input
+                id="profLastName"
+                type="text"
+                formControlName="profLastName"
+                class="form-control xam-input-primary"
+                placeholder="Last Name">
+            </div>
+          </div>
+
+          <!-- Check boxes -->
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="otherSchool" formControlName="otherSchool">
+                <label class="form-check-label" for="otherSchool">Accept from other schools?</label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="otherSemester" formControlName="otherSemester">
+                <label class="form-check-label" for="otherSemester">Accept from earlier semesters?</label>
+              </div>
+
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="otherProfessor" formControlName="otherProfessor">
+                <label class="form-check-label" for="otherProfessor">Accept from other professor?</label>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-6 form-group d-flex">
+              <!-- Plan field -->
+              <p class="col-form-label p-0 mr-5">Exam plan</p>
+
+              <div class="d-flex flex-column">
+                <app-radio-button
+                  id="plan-standard"
+                  label="Standard"
+                  value="standard"
+                  (check)="onPlanChange($event)"
+                  [checked]="f.plan.value === 'standard'"
+                ></app-radio-button>
+                <app-radio-button
+                  id="plan-premium"
+                  label="Premium"
+                  value="premium"
+                  (check)="onPlanChange($event)"
+                  [checked]="f.plan.value === 'premium'"
+                  class="my-2"
+                ></app-radio-button>
+                <app-radio-button
+                  id="plan-mixed"
+                  label="Mixed"
+                  value="mixed"
+                  (check)="onPlanChange($event)"
+                  [checked]="f.plan.value === 'mixed'"
+                ></app-radio-button>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Request exam button -->
+          <div class="text-center mt-5 position-relative">
+            <button [disabled]="loading" class="xam-btn-second request-btn">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+              Request Exam
+            </button>
+            <img src="/assets/images/request-student.png" class="request-img position-absolute">
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Background bottom graphic -->
+    <img src="/assets/images/bg-main-bottom.svg" class="img-fluid request-background request-background-bottom" />
+  </div>
+
+  <!-- Background right graphic -->
+  <img src="/assets/images/bg-main-right.svg" class="img-fluid position-absolute request-background request-background-right" />
+</div>

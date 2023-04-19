@@ -1,0 +1,18 @@
+button {
+    color: var(--color-red);
+    padding: 0 !important;
+    width: 8.625rem;
+    height: 2.875rem;
+    font-size: 1.298rem;
+    &:hover {
+        img {
+          filter: brightness(0) invert(1);
+        }
+        color: white;
+    }
+}
+img {
+    bottom: 0.25rem;
+    fill: var(--color-red);
+    height: 1.1rem;
+}

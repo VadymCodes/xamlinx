@@ -1,0 +1,294 @@
+section h1 {
+    font-weight: bold;
+}
+.hero {
+    margin: 100px 80px 200px; // Keeping the consistent 80px page margin
+    @media only screen and (max-width: 992px) {
+        margin: 100px 80px; // Keeping the consistent 80px page margin
+    }
+    @media only screen and (max-width: 768px) {
+        margin: 100px 40px; // Reduce page margin to 40px in mobile view
+    }
+    h1 {
+      font-size: 3.423rem; // Overwrite the header font size
+      font-family: 'Recoleta-Regular';
+    }
+    .hero-background {
+        top: 0; // Postitioning the background graphic to the top right
+        right: 0; // Postitioning the background graphic to the top right
+        z-index: -1; // Allow the user to be able to click through the graphic to the header.
+        animation: bg-ani 2s linear forwards;
+    }
+    .hero-graphic {
+        width: 480px; // Ensuring the correct size for graphic design.
+        @media only screen and (max-width: 1200px) {
+            width: 350px;
+        }
+        @media only screen and (max-width: 992px) {
+            width: 450px;
+        }
+        @media only screen and (max-width: 560px) {
+            width: 100%;
+        }
+    }
+    .hero-text {
+        width: 470px; // Ensure the paragraphs length
+        h4 { // Design specification
+          font-family: 'Recoleta-Regular';
+          font-weight: normal;
+          font-size: 1.841rem; // Design specification
+        }
+        p {
+          font-size: 1.375rem; // Design specification
+        }
+        @media only screen and (max-width: 992px) {
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .hero-arrow {
+        width: 35%; // Ensuring the correct size for graphic design.
+        animation: arrow 2s forwards;
+    }
+    button { // Design specification
+      height: 4.5rem;
+      width: 15.375rem;
+      padding: 0; // Ensuring correct size
+      font-size: 1.781rem;
+      font-family: 'Recoleta-Regular';
+      :hover {
+          text-decoration: none;
+      }
+    }
+}
+.introduction {
+    // About us's background
+    background-image: url('/assets/images/AboutUs.svg');
+    background-repeat: no-repeat;
+    background-position: top;
+
+    padding: 16.3rem 80px 0; // Positioning the title relatively to the background image
+    transform: translateY(50%); // Positioning for the start of the animation
+    opacity: 0; // Hidden initially for the start of the animation
+    @media only screen and (max-width: 768px) {
+        padding: 16.3rem 40px 0; // Reduce page margin to 40px in mobile view
+    }
+    h1 {
+        font-family: 'Recoleta-Medium'; // Overwrite default header font family
+        font-size: 3.1rem; // Design specification
+        font-weight: normal; // Design specification
+        width: 90%;
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+    }
+    img {
+        width: 5.92rem; // About us's arrow image size
+    }
+    p {
+        font-size: 1.246rem; // Design specification
+        width: 66%;
+        @media only screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+    .points-container {
+        margin-top: 8rem;
+        @media only screen and (max-width: 768px) {
+            margin-top: 4rem;
+        }
+    }
+    .point-text { // About us's selling point label
+        font-size: 1.2rem;
+        font-family: "Recoleta-Medium";
+    }
+    .row { // Setting the size to the Bootstrap's 'row' class that contains 2 selling points
+        width: 80%;
+        @media only screen and (max-width: 992px) {
+            width: 100%;
+        }
+    }
+    button { // Styling call-to-arm button 'Join for free' following design specification
+      margin-top: 3.714rem;
+      font-size: 1.781rem;
+      padding: 0px;
+      width: 15.5rem;
+      height: 4.5rem;
+    }
+    &.fade-in { // Animation class for about us section.
+        animation: fade-in 1s forwards;
+    }
+}
+.how-it-works {
+    margin-top: -10.625rem; // Move the section up so that the background can match the design.
+    @media only screen and (max-width: 992px) {
+        margin-top: -8rem;
+    }
+    @media only screen and (max-width: 768px) {
+      margin-top: -4rem;
+    }
+    .works-bg-top { // Top graphic styling
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .works-bg-bottom { // Bottom graphic styling
+        bottom: 0;
+        right: 0;
+        width: 100%;
+    }
+    .outter-container { // Fill in background color for entire section
+        background-color: rgba(var(--color-red-rgb), 0.05);
+        padding: 1.875rem 80px 6.25rem; // Positioning the title relatively to the background image
+        @media only screen and (max-width: 768px) {
+            padding: 1.875rem 40px 6.25rem; // Reduce page margin to 40px in mobile view
+        }
+    }
+    h1 {
+        font-weight: normal; // Overwrite the default behavior
+        font-size: 3.1rem; // Design specification
+    }
+    p {
+        font-size: 1.375rem; // Design specification
+        &.work-sub {
+            width: 70%;
+            @media only screen and (max-width: 768px) {
+                width: 100%;
+            }
+        }
+    }
+    button {
+        padding: 0; // Ensuring correct size
+        width: 19.25rem; // Design specification
+        height: 9.438rem; // Design specification
+        box-shadow: 0px 4px 10px -2px rgba(var(--color-red-rgb), 0.4); // Shadow value follow the design specific
+        h2 {
+            font-size: 3.103rem; // Design specification
+        }
+        h5 {
+            font-size: 2rem; // Design specification
+        }
+        &:focus {
+            background-color: #f8f9fa !important; // Overwrite Bootstrap default behavior
+        }
+        &:hover,&.selected {
+            background-color: var(--color-red) !important;
+            h2 {
+                color: white !important;
+            }
+        }
+    }
+    .point {
+        &-container {
+            width: 90%;
+        }
+        &-number {
+            background: url('/assets/images/Works-point.png') no-repeat center;
+            min-width: 66px; // Matching background image size
+            height: 66px; // Matching background image size
+            line-height: 66px; // Matching background image size
+            color: white;
+        }
+        &-content {
+            flex: 1 1; // Fit the remaining space so that the number background image doesn't get cropped width: 90%;
+            h4 {
+                font-size: 2rem; // Design specification
+            }
+        }
+    }
+}
+.testimonials {
+    padding: 2rem 80px 0;  // Keeping the consistent 80px page margin
+    @media only screen and (max-width: 768px) {
+        padding: 2rem 40px 0;  // Reduce page margin to 40px in mobile view
+    }
+    h1 {
+      font-weight: normal; // Overwrite h1 behaviour
+      font-size: 3.1rem; // Design specification
+    }
+    img {
+        width: 100%; // For responsiveness
+        max-width: 42.563rem; // Design specification
+    }
+    p {
+        font-size: 1.246rem; // Design specification
+    }
+    .testimonials-sub {
+      width: 98%;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+        background: rgba(var(--color-red-rgb), 0.05);
+        border-radius: 1rem; // Design specification
+        height: 100%; // For text content and author's name alignment
+        q {
+            font-family: "Recoleta-Regular";
+            font-size: 1.219rem; // Design specification
+        }
+        p {
+          font-size: 1.056rem; // Design specification
+        }
+    }
+}
+.ready-success {
+    h1 { // Overwrite following the designer's specification
+        font-family: 'Recoleta-Medium';
+        font-weight: normal;
+        font-size: 3.125rem;
+    }
+    button {
+          width: 15.313rem; // Design specification
+          height: 4.813rem; // Design specification
+          a {
+              font-size: 2.188rem; // Design specification
+          }
+    }
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); // Centering the container
+    }
+}
+@keyframes bg-ani { // Background graphic animation
+  0% {
+    top: 0;
+    right: 0;
+    opacity: 1;
+  }
+  50% {
+    top: -100px;
+    right: -100px;
+    opacity: 0;
+  }
+  51% {
+    top: 100px;
+    right: 100px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    right: 0;
+    opacity: 1;
+  }
+}
+@keyframes arrow { // Arrow animation for large size screen
+  from {
+    top: -40%;
+    right: -30%;
+  }
+  to {
+    top: -8%;
+    right: -2.5%;
+  }
+}
+@keyframes fade-in { // About us animation
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,30 @@
+<div class="text-left my-4" *ngIf="reviewer">
+  <div class="text-center" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="col-4 col-sm-12 col-md-4 my-1 label">Name:</div>
+    <div class="col-8 col-sm-12 col-md-8 my-1">{{ reviewer?.firstName }} {{reviewer?.lastName}}</div>
+
+    <div class="col-4 col-sm-12 col-md-4 my-1 label">School:</div>
+    <div class="col-8 col-sm-12 col-md-8 my-1">School name</div>
+
+    <div class="col-4 col-sm-12 col-md-4 my-1 label">Discipline:</div>
+    <div class="col-8 col-sm-12 col-md-8 my-1">
+      {{ disciplines }}
+    </div>
+
+    <div class="col-4 col-sm-12 col-md-4 my-1 label">Level:</div>
+    <div class="col-8 col-sm-12 col-md-8 my-1">
+      {{ levels }}
+    </div>
+
+    <div class="col-4 col-sm-12 col-md-4 my-1 label">Subject:</div>
+    <div class="col-8 col-sm-12 col-md-8 my-1">
+      {{ subjects }}
+    </div>
+  </div>
+</div>

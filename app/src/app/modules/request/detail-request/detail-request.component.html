@@ -1,0 +1,66 @@
+<div class="main text-center">
+  <!-- Title -->
+  <h1 class="my-5">Matched Exams</h1>
+
+  <!-- Table -->
+  <div class="container text-left">
+    <div class="table-responsive">
+      <table *ngIf="request" class="table xam-table-primary">
+        <!-- Columns -->
+        <thead>
+          <tr>
+            <th>Summary</th>
+            <th>Course Number</th>
+            <th>Grade Value</th>
+            <th>Exam Date</th>
+            <th>Semester</th>
+            <th>Ungraded Exam</th>
+            <th>Graded Exam</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <!-- Rows -->
+        <tbody>
+          <!-- No result -->
+          <tr *ngIf="request.matches.length==0">
+            <td colspan="8" class="text-center">No matches yet</td>
+          </tr>
+
+          <!-- Row data -->
+          <tr *ngFor="let match of request.matches">
+            <td>{{ match.exam.summary }}</td>
+            <td>{{ match.exam.course_number }}</td>
+            <td>{{ match.exam.grade_value }}</td>
+            <td>{{ match.exam.exam_date.date | date }}</td>
+            <td><p>{{ getSemester(match.exam.semester).name }}</p></td>
+            <td>
+              <a *ngIf="match.status=='selected'" href="{{ match.exam.ungraded_sample_url }}" target="_blank" style="min-width: max-content;">
+                <fa-icon [icon]="faFilePdf"></fa-icon> View sample
+              </a>
+              <a *ngIf="match.status=='paid'" href="{{ getMockExam(match.uploads, 'u_mock') }}" target="_blank" style="min-width: max-content;">
+                <fa-icon [icon]="faFilePdf"></fa-icon> Full View
+              </a>
+            </td>
+            <td>
+              <a *ngIf="match.status=='selected'" href="{{ match.exam.graded_sample_url }}" target="_blank" style="min-width: max-content;">
+                <fa-icon [icon]="faFilePdf"></fa-icon> View sample
+              </a>
+              <a *ngIf="match.status=='paid'" href="{{ getMockExam(match.uploads, 'g_mock') }}" target="_blank" style="min-width: max-content;">
+                <fa-icon [icon]="faFilePdf"></fa-icon> Full View
+              </a>
+            </td>
+            <td style="min-width: 100px;">
+              <button *ngIf="match.status=='selected'" class="btn btn-primary btn-sm py-0" style="min-width: max-content" (click)="goToPurchase(match.request_id, match.exam.id)">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+                Pay now
+              </button>
+              <span *ngIf="match.status=='paid'" class="badge badge-success" style="min-width: max-content">Paid</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ngx-spinner></ngx-spinner>
+    </div>
+  </div>
+</div>

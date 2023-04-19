@@ -1,0 +1,10 @@
+<div class="main d-flex align-items-baseline" (click)="onRadioChange()">
+  <img [src]="imageSrc" alt="radio button image" class="position-relative" />
+  <input
+    type="radio"
+    class="form-check-input d-none"
+    [id]="id"
+    [value]="value"
+  />
+  <label [for]="id" class="form-check-label ml-2">{{ label }}</label>
+</div>

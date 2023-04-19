@@ -1,0 +1,21 @@
+<div class="row text-left my-4" *ngIf="exam">
+  <div class="col-4 col-sm-12 col-md-4 my-1 label">Summary:</div>
+  <div class="col-8 col-sm-12 col-md-8 my-1">
+    {{ exam.summary }}
+  </div>
+
+  <div class="col-4 col-sm-12 col-md-4 my-1 label">Discipline:</div>
+  <div class="col-8 col-sm-12 col-md-8 my-1">
+    {{ exam.discipline!.name }}
+  </div>
+
+  <div class="col-4 col-sm-12 col-md-4 my-1 label">Level:</div>
+  <div class="col-8 col-sm-12 col-md-8 my-1">
+    {{ exam.level!.name }}
+  </div>
+
+  <div class="col-4 col-sm-12 col-md-4 my-1 label">Subject:</div>
+  <div class="col-8 col-sm-12 col-md-8 my-1">
+    {{ exam.subject!.name }}
+  </div>
+</div>

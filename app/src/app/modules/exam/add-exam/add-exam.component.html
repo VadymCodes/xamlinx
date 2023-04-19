@@ -1,0 +1,553 @@
+<div class="app-exam text-center d-flex position-relative">
+  <!-- Background left graphic -->
+  <img src="/assets/images/bg-main-left.svg" class="img-fluid position-absolute exam-background exam-background-left" />
+
+  <div class="d-flex flex-column w-100" style="height: min-content">
+    <!-- Background top graphic -->
+    <img src="/assets/images/bg-main-top.svg" class="img-fluid exam-background exam-background-top" />
+
+    <div class="form-wrapper position-relative">
+      <!-- Background image -->
+      <img src="/assets/images/Upload_exam.png" alt="background_image" class="position-absolute exam-background-image" />
+
+      <!-- Title -->
+      <!-- Grouping the leave button and the title so that the leave button can have correct alignment and position -->
+      <div class="mx-auto position-relative">
+        <div class="position-absolute left-0 leave-btn">
+          <app-leave-button></app-leave-button>
+        </div>
+        <h1 class="mb-1">Upload New Exam</h1>
+        <p>and get rewarded!</p>
+      </div>
+
+      <div class="mx-auto my-4">
+
+        <!-- Group buttons -->
+        <div class="btn-group my-4" role="group" aria-label="Mode">
+          <button
+            type="button"
+            [ngClass]="{ 'xam-btn-primary': mode === 'group', 'xam-btn-second': mode === 'single' }"
+            class="xam-btn-primary"
+            (click)="selectMode('single')"
+            [disabled]="loading">Single Mode</button>
+          <button
+            type="button"
+            class="ml-3"
+            [ngClass]="{ 'xam-btn-primary': mode === 'single', 'xam-btn-second': mode === 'group' }"
+            (click)="selectMode('group')"
+            [disabled]="loading">Group Mode</button>
+        </div>
+
+        <!-- Form -->
+        <form class="text-left" [formGroup]="examForm">
+          <!-- Group name (only for group mode) -->
+          <div class="form-group" *ngIf="mode === 'group'">
+            <label for="groupName" class="col-form-label col-form-label-sm">Group Name</label>
+            <input
+              formControlName="groupName"
+              class="form-control xam-input-primary"
+              placeholder="Group 1"
+              (change)="onSearchGroup(f.groupName.value)"
+              [ngClass]="{ 'is-invalid': submitted && f.groupName.errors }"
+              [readonly]="loading">
+            <div *ngIf="submitted && f.groupName.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.groupName.errors.required">Group Name is required</div>
+            </div>
+            <p>{{ groupMessage }}</p>
+          </div>
+
+          <div *ngIf="mode === 'single' || (mode === 'group' && isNewGroup)">
+            <!-- Summary field -->
+            <div class="form-group xam-textarea-wrap">
+              <div class="xam-pull-tab"></div>
+              <label for="summary" class="col-form-label col-form-label-sm">Summary</label>
+              <textarea
+                formControlName="summary"
+                class="form-control xam-input-primary"
+                placeholder="Summary"
+                [ngClass]="{ 'is-invalid': submitted && f.summary.errors }"
+                [readonly]="loading">
+              </textarea>
+
+              <!-- Summary field error -->
+              <div *ngIf="submitted && f.summary.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.summary.errors.required">Summary is required</div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <!-- Discipline select box -->
+              <div class="col-md-4 pr-lg-5">
+                <div class="form-group">
+                  <label for="disciplineId" class="col-form-label col-form-label-sm">Discipline</label>
+                  <ng-select
+                    formControlName="disciplineId"
+                    placeholder="Select discipline"
+                    class="xam-input-primary"
+                    [ngClass]="{ 'is-invalid': submitted && f.disciplineId.errors }"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let discipline of disciplines" [value]="discipline.id">
+                      {{discipline.name}}
+                    </ng-option>
+                  </ng-select>
+
+                  <!-- Discipline error -->
+                  <div *ngIf="submitted && f.disciplineId.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.disciplineId.errors.required">Discipline is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Level select box -->
+              <div class="col-md-4 px-lg-5">
+                <div class="form-group">
+                  <label for="levelId" class="col-form-label col-form-label-sm">Level</label>
+                  <ng-select
+                    formControlName="levelId"
+                    placeholder="Select level"
+                    class="xam-input-primary"
+                    [ngClass]="{ 'is-invalid': submitted && f.levelId.errors }"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let level of levels" [value]="level.id">
+                      {{level.name}}
+                    </ng-option>
+                  </ng-select>
+
+                  <!-- Level error -->
+                  <div *ngIf="submitted && f.levelId.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.levelId.errors.required">Level is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subject select box -->
+              <div class="col-md-4 pl-lg-5">
+                <div class="form-group">
+                  <label for="subjectId" class="col-form-label col-form-label-sm">Subject</label>
+                  <ng-select
+                    formControlName="subjectId"
+                    placeholder="Select subject"
+                    class="xam-input-primary"
+                    [ngClass]="{ 'is-invalid': submitted && f.subjectId.errors }"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let subject of subjects" [value]="subject.id">
+                      {{subject.name}}
+                    </ng-option>
+                  </ng-select>
+
+                  <!-- Subject error -->
+                  <div *ngIf="submitted && f.subjectId.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.subjectId.errors.required">Subject is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Grade value select box -->
+              <div class="col-md-4 pr-lg-5" *ngIf="mode === 'single'">
+                <div class="form-group">
+                  <label for="gradeValue" class="col-form-label col-form-label-sm">Grade Value</label>
+                  <input
+                    id="gradeValue"
+                    type="number"
+                    formControlName="gradeValue"
+                    class="form-control xam-input-primary"
+                    placeholder="Grade Value"
+                    [ngClass]="{ 'is-invalid': submitted && f.gradeValue.errors }"
+                    [readonly]="loading">
+
+                  <!-- Grade value error -->
+                  <div *ngIf="submitted && f.gradeValue.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.gradeValue.errors.required">Grade value is required</div>
+                  </div>
+                  <div *ngIf="submitted && f.gradeValue.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.gradeValue.errors.min">Grade value must be greter than 92</div>
+                  </div>
+                  <div *ngIf="submitted && f.gradeValue.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.gradeValue.errors.max">Grade value must be less than 100</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Course number -->
+              <div class="col-md-4" [ngClass]="{'px-lg-5': mode === 'single', 'pr-lg-5': mode !== 'single'}">
+                <div class="form-group">
+                  <label for="courseNum" class="col-form-label col-form-label-sm">Course Number</label>
+                  <input
+                    id="courseNum"
+                    type="text"
+                    formControlName="courseNum"
+                    class="form-control xam-input-primary"
+                    placeholder="Course Number"
+                    [readonly]="loading"
+                    [ngClass]="{ 'is-invalid': submitted && f.courseNum.errors }">
+
+                    <!-- Course number error -->
+                    <div *ngIf="submitted && f.courseNum.errors" class="invalid-feedback text-left">
+                      <div *ngIf="f.courseNum.errors.pattern">Only letters, numbers, and hyphens are allowed!</div>
+                    </div>
+                </div>
+              </div>
+
+              <!-- Exam number -->
+              <div class="col-md-4" [ngClass]="{'pl-lg-5': mode === 'single', 'px-lg-5': mode !== 'single'}">
+                <div class="form-group">
+                  <label for="examNumber" class="col-form-label col-form-label-sm">Exam Number</label>
+                  <ng-select
+                    formControlName="examNumber"
+                    placeholder="Select number"
+                    class="xam-input-primary"
+                    [ngClass]="{ 'is-invalid': submitted && f.examNumber.errors }"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let examNumber of examNumbers" [value]="examNumber">
+                      {{ examNumber }}
+                    </ng-option>
+                  </ng-select>
+
+                  <!-- Exam number error -->
+                  <div *ngIf="submitted && f.examNumber.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.examNumber.errors.required">Exam Number is required</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exam date -->
+              <div class="col-md-4" [ngClass]="{'pr-lg-5': mode === 'single', 'pl-lg-5': mode !== 'single'}">
+                <div class="form-group">
+                  <label for="examDate" class="col-form-label col-form-label-sm">Exam Date</label>
+                  <input
+                    id="examDate"
+                    type="date"
+                    formControlName="examDate"
+                    class="form-control xam-input-primary"
+                    placeholder="Exam Date"
+                    [ngClass]="{ 'is-invalid': submitted && f.examDate.errors }"
+                    [readonly]="loading">
+
+                  <!-- Exam date errors -->
+                  <div *ngIf="submitted && f.examDate.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.examDate.errors.required">Exam date is required</div>
+                  </div>
+                  <div *ngIf="submitted && f.examDate.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.examDate.errors.message">{{ f.examDate.errors.message }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Exam duration -->
+              <div class="col-md-4" [ngClass]="{'px-lg-5': mode === 'single', 'pr-lg-5': mode !== 'single'}">
+                <div class="form-group">
+                  <label for="duration" class="col-form-label col-form-label-sm">Exam duration</label>
+                  <ng-select
+                    formControlName="duration"
+                    class="xam-input-primary"
+                    placeholder="Select duration"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let duration of durations" [value]="duration.value">
+                      {{duration.name}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+
+              <!-- Semester select box -->
+              <div class="col-md-4" [ngClass]="{'pl-lg-5': mode === 'single', 'px-lg-5': mode !== 'single'}">
+                <div class="form-group">
+                  <label for="semester" class="col-form-label col-form-label-sm">Semester</label>
+                  <ng-select
+                    formControlName="semester"
+                    placeholder="Select semester"
+                    class="xam-input-primary"
+                    [ngClass]="{ 'is-invalid': submitted && f.semester.errors }"
+                    [readonly]="loading">
+                    <ng-option *ngFor="let semester of semesters" [value]="semester.value">
+                      {{semester.name}}
+                    </ng-option>
+                  </ng-select>
+
+                  <!-- Semester error -->
+                  <div *ngIf="submitted && f.semester.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.semester.errors.required">Semester is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-5 col-12 mr-auto">
+                <div class="form-group">
+                  <label for="profEmail" class="col-form-label col-form-label-sm">Professor Email</label>
+                  <input
+                    type="email"
+                    id="profEmail"
+                    formControlName="profEmail"
+                    class="form-control xam-input-primary"
+                    placeholder="Professor Email"
+                    (change)="onSearchProf(f.profEmail.value)"
+                    [ngClass]="{ 'is-invalid': submitted && f.profEmail.errors }"
+                    [readonly]="loading">
+                  <div *ngIf="submitted && f.profEmail.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.profEmail.errors.required">Email is required</div>
+                  </div>
+                  <div *ngIf="submitted && f.profEmail.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.profEmail.errors.email">Invalid email proviced</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 ml-auto">
+                <div class="form-group">
+                  <label for="profWeb" class="col-form-label col-form-label-sm">Professor Web Address</label>
+                  <input
+                    id="profWeb"
+                    type="text"
+                    formControlName="profWeb"
+                    class="form-control xam-input-primary"
+                    placeholder="Professor Web address"
+                    [ngClass]="{ 'is-invalid': submitted && f.profWeb.errors }"
+                    [readonly]="loading">
+                  <div *ngIf="submitted && f.profWeb.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.profWeb.errors.message">{{ f.profWeb.errors.message }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 mr-auto">
+                <div class="form-group">
+                  <label for="profFirstName" class="col-form-label col-form-label-sm">Professor First Name</label>
+                  <input
+                    id="profFirstName"
+                    type="text"
+                    formControlName="profFirstName"
+                    class="form-control xam-input-primary"
+                    placeholder="Professor First Name"
+                    [ngClass]="{ 'is-invalid': submitted && f.profFirstName.errors }"
+                    [readonly]="loading">
+                  <div *ngIf="submitted && f.profFirstName.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.profFirstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 ml-auto">
+                <div class="form-group">
+                  <label for="profLastName" class="col-form-label col-form-label-sm">Professor Last Name</label>
+                  <input
+                    id="profLastName"
+                    type="text"
+                    formControlName="profLastName"
+                    class="form-control xam-input-primary"
+                    placeholder="Last Name"
+                    [ngClass]="{ 'is-invalid': submitted && f.profLastName.errors }"
+                    [readonly]="loading">
+                  <div *ngIf="submitted && f.profLastName.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.profLastName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="mode === 'single'">
+              <div class="col-md-5 col-12 mr-auto">
+                <div class="form-group">
+                  <label class="col-form-label col-form-label-sm">Ungraded Actual Exam</label>
+                  <div class="custom-file xam-file-input">
+                    <input
+                      [type]="loading ? 'text' : 'file'"
+                      class="custom-file-input"
+                      id="ungradeActualFile"
+                      formControlName="ungradeActualFile"
+                      accept="application/pdf"
+                      (change)="handleFileInput($event, 0)"
+                      [ngClass]="{ 'is-invalid': submitted && f.ungradeActualFile.errors }"
+                      [readonly]="loading"
+                      >
+                    <label class="custom-file-label" for="ungradeActualFile">
+                      {{ ungradeActualFile ? ungradeActualFile.name: 'Choose file' }}
+                    </label>
+                    <div *ngIf="submitted && f.ungradeActualFile.errors" class="invalid-feedback text-left">
+                      <div *ngIf="f.ungradeActualFile.errors.required">File is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 ml-auto">
+                <div class="form-group">
+                  <label class="col-form-label col-form-label-sm">Graded Actual Exam</label>
+                  <div class="custom-file xam-file-input">
+                    <input
+                      [type]="loading ? 'text' : 'file'"
+                      class="custom-file-input"
+                      id="gradeActualFile"
+                      formControlName="gradeActualFile"
+                      accept="application/pdf"
+                      (change)="handleFileInput($event, 1)"
+                      [ngClass]="{ 'is-invalid': submitted && f.gradeActualFile.errors }"
+                      [readonly]="loading">
+                    <label class="custom-file-label" for="gradeActualFile">
+                      {{ gradeActualFile ? gradeActualFile.name: 'Choose file' }}
+                    </label>
+                    <div *ngIf="submitted && f.gradeActualFile.errors" class="invalid-feedback text-left">
+                      <div *ngIf="f.gradeActualFile.errors.required">File is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mt-5 text-center">
+                <input
+                  type="checkbox"
+                  [checked]="single_mock_mode === 'qaMode'"
+                  (change)="selectSingleMockMode()"
+                  [disabled]="loading"/>
+                  Use Question and Answer mode
+              </div>
+              <div class="col-md-5 col-12 mr-auto" *ngIf="single_mock_mode === 'handed'">
+                <div class="form-group">
+                  <label class="col-form-label col-form-label-sm">Ungraded Mock Exam</label>
+                  <div class="custom-file xam-file-input">
+                    <input
+                      [type]="loading ? 'text' : 'file'"
+                      class="custom-file-input"
+                      id="ungradeMockFile"
+                      formControlName="ungradeMockFile"
+                      accept="application/pdf"
+                      (change)="handleFileInput($event, 2)"
+                      [ngClass]="{ 'is-invalid': submitted && f.ungradeMockFile.errors }"
+                      [readonly]="loading">
+                    <label class="custom-file-label" for="ungradeMockFile">
+                      {{ ungradeMockFile ? ungradeMockFile.name: 'Choose file' }}
+                    </label>
+                    <div *ngIf="submitted && f.ungradeMockFile.errors" class="invalid-feedback text-left">
+                      <div *ngIf="f.ungradeMockFile.errors.required">File is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5 col-12 ml-auto" *ngIf="single_mock_mode === 'handed'">
+                <div class="form-group">
+                  <label class="col-form-label col-form-label-sm">Graded Mock Exam</label>
+                  <div class="custom-file xam-file-input">
+                    <input
+                      [type]="loading ? 'text' : 'file'"
+                      class="custom-file-input"
+                      id="gradeMockFile"
+                      formControlName="gradeMockFile"
+                      accept="application/pdf"
+                      (change)="handleFileInput($event, 3)"
+                      [ngClass]="{ 'is-invalid': submitted && f.gradeMockFile.errors }"
+                      [readonly]="loading">
+                    <label class="custom-file-label" for="gradeMockFile">
+                      {{ gradeMockFile ? gradeMockFile.name: 'Choose file' }}
+                    </label>
+                    <div *ngIf="submitted && f.gradeMockFile.errors" class="invalid-feedback text-left">
+                      <div *ngIf="f.gradeMockFile.errors.required">File is required</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 my-3" *ngIf="single_mock_mode === 'qaMode'">
+                <app-question-item
+                  *ngFor="let item of single_questions ; let i = index" [attr.data-index]="i"
+                  [index]="i + 1"
+                  [(qa)]="single_questions[i]"
+                  [disabled]="loading"></app-question-item>
+                <div *ngIf="single_questions.length < 15" class="text-center">
+                  <button class="xam-btn-primary" (click)="addMoreQA()" [disabled]="loading">Add {{single_questions.length>0? 'More': ''}} Question</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="mode === 'group'">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="col-form-label col-form-label-sm">Date Proven File</label>
+                <div class="custom-file xam-file-input">
+                  <input
+                    [type]="loading ? 'text' : 'file'"
+                    class="custom-file-input"
+                    id="dateProvenFile"
+                    formControlName="dateProvenFile"
+                    accept="application/pdf"
+                    (change)="handleFileInput($event, 4)"
+                    [ngClass]="{ 'is-invalid': submitted && f.dateProvenFile.errors }"
+                    [readonly]="loading">
+                  <label class="custom-file-label" for="dateProvenFile">
+                    {{ dateProvenFile ? dateProvenFile.name: 'Choose file' }}
+                  </label>
+                  <div *ngIf="submitted && f.dateProvenFile.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.dateProvenFile.errors.required">File is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="col-form-label col-form-label-sm">Identity Proven File</label>
+                <div class="custom-file xam-file-input">
+                  <input
+                    [type]="loading ? 'text' : 'file'"
+                    class="custom-file-input"
+                    id="identityProvenFile"
+                    formControlName="identityProvenFile"
+                    accept="application/pdf"
+                    (change)="handleFileInput($event, 5)"
+                    [ngClass]="{ 'is-invalid': submitted && f.identityProvenFile.errors }"
+                    [readonly]="loading">
+                  <label class="custom-file-label" for="identityProvenFile">
+                    {{ identityProvenFile ? identityProvenFile.name: 'Choose file' }}
+                  </label>
+                  <div *ngIf="submitted && f.identityProvenFile.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.identityProvenFile.errors.required">File is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label class="col-form-label col-form-label-sm">Exam File</label>
+                <div class="custom-file xam-file-input">
+                  <input
+                    [type]="loading ? 'text' : 'file'"
+                    class="custom-file-input"
+                    id="examProvenFile"
+                    formControlName="examProvenFile"
+                    accept="application/pdf"
+                    (change)="handleFileInput($event, 6)"
+                    [ngClass]="{ 'is-invalid': submitted && f.examProvenFile.errors }"
+                    [readonly]="loading">
+                  <label class="custom-file-label" for="examProvenFile">
+                    {{ examProvenFile ? examProvenFile.name: 'Choose file' }}
+                  </label>
+                  <div *ngIf="submitted && f.examProvenFile.errors" class="invalid-feedback text-left">
+                    <div *ngIf="f.examProvenFile.errors.required">File is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="my-3" *ngIf="mode === 'group'">
+            <app-question-item
+              *ngFor="let item of questions ; let i = index" [attr.data-index]="i"
+              [index]="i + 1"
+              [(qa)]="questions[i]"
+              [disabled]="loading"></app-question-item>
+            <div *ngIf="questions.length < 15" class="text-center">
+              <button class="xam-btn-primary" (click)="addMoreQA()" [disabled]="loading">Add {{questions.length>0? 'More': ''}} Question</button>
+            </div>
+          </div>
+          <div class="text-center mt-5">
+            <button [disabled]="loading" class="xam-btn-second upload-btn" (click)="onSubmit()" [disabled]="loading">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.3rem' }"></span>
+              Upload Exam
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Background bottom graphic -->
+    <img src="/assets/images/bg-main-bottom.svg" class="img-fluid exam-background exam-background-bottom" />
+  </div>
+
+  <!-- Background right graphic -->
+  <img src="/assets/images/bg-main-right.svg" class="img-fluid position-absolute exam-background exam-background-right" />
+</div>

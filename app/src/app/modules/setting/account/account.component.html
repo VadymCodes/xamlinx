@@ -1,0 +1,154 @@
+<div class="app-account text-center">
+  <div class="account-main mx-auto position-relative">
+    <!-- Graphic -->
+    <img src="/assets/images/Signup-Cogs.png" class="img-fluid position-absolute bg-cogs" />
+
+    <!-- Title -->
+    <h1>Settings</h1>
+
+    <!-- Form -->
+    <form [formGroup]="userForm" class="text-left mx-auto">
+      <div class="row">
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <div class="form-group">
+            <!-- First name text field -->
+            <label class="col-form-label">First Name</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control xam-input-primary"
+              placeholder="First Name"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+            />
+
+            <!-- First name field error -->
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback text-left"
+            >
+              <div *ngIf="f.firstName.errors.required">
+                First Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <div class="form-group">
+            <!-- Last name text field -->
+            <label class="col-form-label">Last Name</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control xam-input-primary"
+              placeholder="Last Name"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+            />
+
+            <!-- Last name field error -->
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback text-left"
+            >
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <div class="form-group">
+            <!-- Email text field -->
+            <label class="col-form-label">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control xam-input-primary"
+              placeholder="Last Name"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+            />
+
+            <!-- Email field error -->
+            <div
+              *ngIf="submitted && f.email.errors"
+              class="invalid-feedback text-left"
+            >
+              <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <div class="form-group">
+            <!-- Verified status field -->
+            <label class="col-form-label">Verified Status</label>
+
+            <!-- Images -->
+            <div>
+              <img
+                *ngIf="f.verified.value"
+                src="/assets/images/AboutUs_Points.png"
+                width="60"
+              />
+              <img
+                *ngIf="!f.verified.value"
+                src="/assets/images/target.svg"
+                width="60"
+              />
+
+              <!-- Label -->
+              <span *ngIf="f.verified.value">Verfied</span>
+              <span *ngIf="!f.verified.value">Pending</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <div class="form-group">
+            <!-- New password text field -->
+            <label class="col-form-label">New Password</label>
+            <input
+              type="password"
+              formControlName="newPassword"
+              class="form-control xam-input-primary"
+              placeholder="First Name"
+              [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <div class="form-group">
+            <!-- Confirm password text field -->
+            <label class="col-form-label">Confirm New Password</label>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control xam-input-primary"
+              placeholder="Last Name"
+              [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+            />
+
+            <!-- Confirm password field error -->
+            <div
+              *ngIf="submitted && f.confirmPassword.errors"
+              class="invalid-feedback text-left"
+            >
+              <div *ngIf="f.confirmPassword.errors.confirmedValidator">
+                Confirm password must be same with password
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <!-- Save button -->
+        <button [disabled]="loading" class="xam-btn-second" (click)="onSubmit()">
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+            [ngStyle]="{ 'margin-bottom': '0.6rem' }"
+          ></span>
+          Save
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+      </div>
+    </form>
+  </div>
+
+</div>

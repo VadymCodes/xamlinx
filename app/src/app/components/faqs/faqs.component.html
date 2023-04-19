@@ -1,0 +1,585 @@
+<section class="main py-5">
+  <!-- Title -->
+  <h1 class="mt-5 text-center">FAQs</h1>
+
+  <section class="content mx-auto">
+    <!-- Brief section -->
+    <h4 class="mb-4 section-title">Brief</h4>
+    <!-- Brief content -->
+    <ngb-accordion [closeOthers]="true">
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>What is Xamlinx?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Xamlinx is the first platform that allows university students, both
+          undergraduates and graduates, to compose mock exams similar to the
+          actual exams they took and get rewarded each time their mock exam is
+          requested by some other students.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle><span>Why Xamlinx?</span></button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Practice, practice, practice...that’s what they say, right? Xamlinx is
+          here to provide preparation material so that the real exam becomes
+          just a second chance; and who doesn’t like second chances?
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <!-- Uploads & Requests Section -->
+    <h4 class="mb-4 section-title">Uploads & Requests</h4>
+    <!-- Uploads & Requests content -->
+    <ngb-accordion [closeOthers]="true">
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>When can I upload an exam on Xamlinx?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>There are two ways to upload mock exams on Xamlinx:</p>
+
+          <ul>
+            <li>
+              In Single Mode, students are allowed to supply mock exams up to 6
+              months after the real exam date.
+            </li>
+            <li>
+              In Group Mode, students may not supply a mock exam more than 72
+              hours after the real exam date.
+            </li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle><span>What is Single Mode?</span></button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Single Mode is for students who compose mock exams individually, based
+          on their single experience with the real exam. For a Single Mode mock
+          exam to be accepted and ultimately made available for matching to
+          requests on our platform, the student must have scored at least 92% on
+          the real exam.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle><span>What is Group Mode?</span></button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>
+            Group Mode if for students who like to get together after an exam
+            and discuss it. They can use the Xamlinx platform to compose a mock
+            exam similar to the real one they took. In order for a mock exam
+            composed in Group Mode to be accepted on our platform, the following
+            requirements must apply:
+          </p>
+
+          <ul>
+            <li>At least 1 member in the group scored 92% or above</li>
+            <li>At least 2 members in the group scored 85% or above</li>
+            <li>At least 3 members in your group scored 80% or above</li>
+          </ul>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >How many total group members are allowed in Group Mode?</span
+              >
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          A group on Xamlinx must have at least 3 members in it within 24 hours
+          of its creation date, and can have no more than 5 members.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >In Single Mode, when must I upload actual files for my supplied
+                mock exam?
+              </span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          You are encouraged to upload files for your mock exam at the time you
+          fill out the upload form; however, you are not required to do so until
+          you receive an email prompting you for those files. You will receive
+          an email prompting you to upload your files when there was a matching
+          request to your mock exam supply.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>Do I upload mock exam files in Group Mode?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          In group mode, you are only required to upload some files to verify
+          your score and belonging to your institution; however, because in
+          Group Mode you are providing your mock exam Q&As directly on our site,
+          there is no need to upload mock exam files.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >In Single Mode, can I provide my mock exam Q&As directly on the
+                site instead of uploading them?</span
+              >
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          We are adding this feature, and you will be able to provide Q&As for
+          your mock exam in Single Mode directly from your Xamlinx account.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>How do I join a Group?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Each group has a group lead (i.e. the student who created the group);
+          ask your group lead to provide you with the group name, which you need
+          in order to join that group.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >In Single Mode, how many files do I have to upload for each
+                Mock Exam?
+              </span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>
+            For verification purposes, we require you to upload both the graded
+            and ungraded versions of the real official exam.
+          </p>
+
+          <p>
+            For your mock exam, you must upload questions and your proposed
+            solution to your exam questions as separate files, 1 file for each
+            version.
+          </p>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>How do I request a mock exam?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          We are adding this feature, and you will be able to provide Q&As for
+          your mock exam in Single Mode directly from your Xamlinx account.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>What does it mean to “supply” a mock exam?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Supplying a mock exam is not the same as actually uploading (or
+          composing) the exam questions and solutions on our site; supplying a
+          mock exam simply means filling out and submitting the mock exam upload
+          form from your account. The mock exam upload form must be filled out
+          only after you have taken the real official exam, and can be updated
+          later when you have rscore on the real official exam.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >What does it mean for an exam to be “accepted” on our
+                platform?</span
+              >
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Accepting an exam on Xamlinx means that we have reviewed the real exam
+          scores of the students who supplied it, as well as made sure that the
+          mock exam provided by the student(s) is similar but different from the
+          real exam, as well as verifying the student(s)’ institution, checking
+          for correct grammar, and a few other checks that are designed to
+          ensure that we host only high quality mock exams that are similar but
+          different from the official ones.
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <!-- Cost & Payments Section -->
+    <h4 class="mb-4 section-title">Cost & Payments</h4>
+
+    <!-- Cost & Payments content -->
+    <ngb-accordion [closeOthers]="true">
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>How much does a mock exam cost?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>
+            The cost of a mock exam depends on its plan and composition mode (Single Mode or Group Mode).
+          </p>
+
+          <p>
+            Xamlinx offers 2 main plans, a standard plan, and a premium plan.
+          </p>
+
+          <p>
+            <b>Standard</b> mock exams are composed by high-scoring students and
+            further checked for grammatical and spelling errors, but not
+            reviewed by subject matter specialists.
+          </p>
+
+          <p>
+            <b>Premium</b> mock exams are standard mock exams that have been
+            additionally reviewed by subject matter specialists.
+          </p>
+
+          <p>
+            Standard Single Mode mock exams are priced at USD 45 each.
+            Standard Group Mode mock exams are priced at USD 75 each.
+            Premium mock exams are priced at USD 100 each regardless of exam composition mode.
+          </p>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>How much do I get paid for providing a mock exam?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>
+            For having done well on your real official exam, we are happy to send
+            you a financial reward ranging anywhere from 10 USD to 20 USD per mock
+            exam you provided and that met our acceptance criteria.
+          </p>
+
+          <div>
+            As a general rule for mock exams provided in Single Mode:
+            <ul>
+              <li>
+                A 1 or 2-page long mock exam with estimated exam duration of less than 2 hours will earn you a USD 10 reward.
+              </li>
+              <li>
+                A 1 or 2-page long mock exam with estimated exam duration of greater than 2 hours will earn you a USD 15 reward.
+              </li>
+              <li>
+                A 2 to 3-page long mock exam with estimated exam duration of greater than 2 hours will earn you a USD 20 reward.
+              </li>
+            </ul>
+          </div>
+
+          <p>
+            All mock exams provided in Group Mode will earn its composers a USD 12 reward each.
+          </p>
+
+          <p>
+            <u>Note</u>: The estimated completion duration on your provided mock exam must match the assigned duration on the real exam, since you are to provide a mock exam of similar difficulty as the real exam.
+          </p>
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>When will I get paid for providing a mock exam?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          You will be paid within 48 hours of the time a requester purchased
+          your provided mock exam.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>How will I get paid for providing a mock exam?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          You will be paid via the payment method you added in your account.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >Can I be refunded for any reason after I have paid for and
+                obtained a mock exam?</span
+              >
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          All payments made towards a mock exam purchase are final, and
+          non-refundable; however, you will always have the opportunity to view
+          a small sample of the Mock Exam before you make your purchase, and
+          whenever possible, you will be presented with several matches for you
+          to choose from.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >What assurance do I have that my work composing an original
+                mock exam won’t be wasted?
+              </span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <p>
+            In Single Mode, you do not have to upload any file or compose any
+            questions until you are invited to do so! You will be invited to
+            upload or compose your Q&As only when there is at least a 1 in 5
+            chance that your mock exam will be selected by the requester.
+          </p>
+
+          <p>
+            In Group Mode, however, you are required to provide your part of the
+            group’s overall Q&As within 72 hours from the time the group was
+            created; but because you are working in a group, it is less work
+            than it would have been in Single Mode, even though we can’t tell
+            exactly when [or put a percentage on how likely] your group’s mock
+            exam will be selected by a requester.
+          </p>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <!-- Exam Integrity Section -->
+    <h4 class="mb-4 section-title">Exam Integrity</h4>
+
+    <!-- Exam Integrity content -->
+    <ngb-accordion [closeOthers]="true">
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >How does Xamlinx protect the integrity of academic exams?
+              </span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          Students who compose mock exams on our platform are required to also
+          upload a copy of the real exam; this is so that we may ensure that the
+          mock exam composed by the student is different from the real exam.
+          Mock exam composed by students must be their unique and original
+          composition addressing similar topics covered on the real exam, but
+          yet distinct in their contents.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span>Will you contact my professor?</span>
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          We will not contact your professor unless we have reason to believe
+          that your provided exam score was manufactured. Your professor’s
+          information is requested primarily for automated verification
+          purposes.
+        </ng-template>
+      </ngb-panel>
+
+      <ngb-panel>
+        <ng-template ngbPanelHeader let-opened="opened">
+          <div class="d-flex align-items-center justify-content-between">
+            <button ngbPanelToggle>
+              <span
+                >What are the penalties for providing mock exams that are too
+                similar to the official exams?</span
+              >
+            </button>
+
+            <button ngbPanelToggle>
+              <fa-icon [icon]="opened ? faMinus : faPlus"></fa-icon>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          In composing your mock exams, although the concepts covered must be
+          the same as those on the official exam you took, the scenarios must be
+          different; you must come up with your own scenarios. Your provided
+          mock exam will be rejected if deemed too similar to the official one.
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+    <!-- Spacing -->
+    <div class="my-5">&nbsp;</div>
+  </section>
+</section>

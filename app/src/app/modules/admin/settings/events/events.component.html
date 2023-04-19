@@ -1,0 +1,67 @@
+<div class="container text-center">
+  <!-- Title -->
+  <h1 class="mt-0 mb-3">Events</h1>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <!-- Events table -->
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>Admin Name</th>
+          <th>Event Type</th>
+          <th>Event Target</th>
+          <th>Target ID</th>
+          <th>Event Date</th>
+          <th>Event Time</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="6" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="!events">
+          <td colspan="6" class="text-center">No result</td>
+        </tr>
+
+        <!-- Row data -->
+        <tr *ngFor="let event of events">
+          <td>{{ event.adminName }}</td>
+          <td>{{ event.eventType }}</td>
+          <td>{{ event.eventTarget }}</td>
+          <td>{{ event.targetID }}</td>
+          <td>{{ event.eventDate }}</td>
+          <td>{{ event.eventTime }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Table footer -->
+    <div class="d-flex justify-content-between my-5">
+      <!-- Pagination -->
+      <ngb-pagination
+        [collectionSize]="collectionSize"
+        [(page)]="page"
+        [pageSize]="pageSize"
+      >
+      </ngb-pagination>
+
+      <!-- Page size -->
+      <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="50">50 items per page</option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="app-payment-method container text-center position-relative">
+  <!-- Background graphic -->
+  <img src="/assets/images/bg-payment.svg" class="img-fluid position-absolute payment-bg" />
+
+  <!-- Title -->
+  <h1>Payment Methods</h1>
+  <form [formGroup]="paymentMethodForm" class="mx-auto mt-4">
+    <div class="form-row">
+      <div class="col-sm-5 mb-3">
+
+        <!-- Payment method field -->
+        <ng-select
+          formControlName="type"
+          placeholder="Select type"
+          class="xam-input-primary"
+          [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+          <ng-option *ngFor="let paymentMethod of availableMethods | keyvalue" [value]="paymentMethod.key">
+            {{ paymentMethod.key }}
+          </ng-option>
+        </ng-select>
+
+        <!-- Payment method error -->
+        <div *ngIf="submitted && f.type.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.type.errors.required">Type is required</div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-3 ml-auto">
+        <!-- Email field -->
+        <input
+          type="text"
+          formControlName="email"
+          class="form-control mr-2 xam-input-primary"
+          placeholder="Email"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+
+        <!-- Email errors -->
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email is invalid</div>
+        </div>
+
+        <!-- Add email button -->
+        <button [disabled]="submitting" class="xam-btn-second float-right" (click)="onSubmit()">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.4rem' }"></span>
+          Add
+        </button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </div>
+  </form>
+
+  <!-- Table -->
+  <div class="table-responsive my-4 mx-auto">
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Email</th>
+          <!-- <th>Status</th> -->
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="3" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="paymentMethods.length === 0 && !loading">
+          <td colspan="3" class="text-center">No result</td>
+        </tr>
+
+        <tr *ngFor="let method of paymentMethods">
+          <td>{{ method.type }}</td>
+          <td>{{ method.payment_email }}</td>
+          <!-- <td>{{ method.status }}</td> -->
+          <td>
+            <button class="btn btn-sm" (click)="removePaymentMethod(method.id)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

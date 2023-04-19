@@ -1,0 +1,135 @@
+<form [formGroup]="form" class="main-container d-flex flex-column text-left">
+  <!-- Countries select field -->
+  <div class="form-group">
+    <label for="school">Select country</label>
+
+    <div class="w-100 text-center" *ngIf="loadings.countries">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <ng-select
+      class="xam-input-primary"
+      placeholder="United States of America"
+      bindLabel="country_name"
+      bindValue="id"
+      [items]="countries"
+      formControlName="country"
+      [readonly]="loadings.extension"
+      *ngIf="!loadings.countries"
+    >
+    </ng-select>
+  </div>
+
+  <!-- Schools select fields -->
+  <div class="form-group">
+    <label for="school">Select school</label>
+
+    <div class="w-100 text-center" *ngIf="loadings.schools">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <ng-select
+      class="xam-input-primary"
+      placeholder="Harvard University"
+      bindLabel="school_name"
+      bindValue="id"
+      [items]="schools"
+      formControlName="school"
+      [readonly]="!schools.length || loadings.extension"
+      *ngIf="!loadings.schools"
+    >
+    </ng-select>
+  </div>
+
+  <!-- Extensions select field -->
+  <!-- <div class="form-group">
+    <label for="school">School Extensions</label>
+    <ng-select
+      class="xam-input-primary"
+      placeholder="Select an extension"
+      [items]="extensions"
+    >
+    </ng-select>
+  </div> -->
+
+  <!-- School extensions -->
+  <div class="form-group">
+    <label for="school">School extensions</label>
+
+    <div
+      class="extensions-container d-flex flex-column"
+      *ngIf="extensions.length !== 0 && !loadings.extension"
+    >
+      <div
+        class="extension-field position-relative"
+        *ngFor="let extension of extensions"
+      >
+        {{ extension }}
+        <fa-icon
+          [icon]="faTrashAlt"
+          class="field-icon position-absolute"
+          role="button"
+          (click)="onConfirmRemove(modal, extension)"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group extension-add position-relative" *ngIf="!loadings.extension">
+    <input
+      type="text"
+      class="xam-input-primary"
+      placeholder="Add an extension"
+      formControlName="newExtension"
+      [readonly]="!form.get('school')?.value || loadings.extension"
+    />
+    <fa-icon
+      [icon]="faPlus"
+      class="field-icon position-absolute"
+      role="button"
+      (click)="onAddExtension()"
+    ></fa-icon>
+  </div>
+
+  <div class="w-100 text-center" *ngIf="loadings.extension">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</form>
+
+<!-- Confirmatino modal -->
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-confirmation">Confirmation</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.close(false)"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">Do you want to remove this abbreviation?</div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="xam-btn-primary" (click)="modal.close(false)">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="xam-btn-second ml-2"
+      (click)="modal.close(true)"
+    >
+      Confirm
+    </button>
+  </div>
+</ng-template>

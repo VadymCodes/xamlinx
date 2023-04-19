@@ -1,0 +1,158 @@
+<div class="app-signup bg-transparent border-0">
+  <div class="text-center mx-auto signup-main px-4 position-relative">
+    <!-- Graphic -->
+    <img src="/assets/images/Signup-Cogs.png" class="img-fluid position-absolute bg-cogs" />
+
+    <!-- Title -->
+    <h4 class="mb-0">Join Xamlinx</h4>
+
+    <!-- Subtitle -->
+    <p>get prepared and get rewarded!</p>
+
+    <form class="text-left" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="row mt-4">
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <div class="form-group">
+            <!-- First name field -->
+            <label for="firstName" class="col-form-label col-form-label-sm">First name</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control xam-input-primary"
+              placeholder="John"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+
+            <!-- First name field errors -->
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <div class="form-group">
+            <!-- Last name field -->
+            <label for="lastName" class="col-form-label col-form-label-sm">Last name</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control xam-input-primary"
+              placeholder="Smith"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+
+            <!-- Last name field errors -->
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <!-- Country field -->
+          <label for="countryId" class="col-form-label col-form-label-sm">Select country</label>
+          <ng-select
+            formControlName="countryId"
+            placeholder="United States"
+            class="xam-input-primary"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+            (change)="getSchools()">
+            <ng-option *ngFor="let country of countries" [value]="country.id">
+              {{country.country_name}}
+            </ng-option>
+          </ng-select>
+
+          <!-- Country field errors -->
+          <div *ngIf="submitted && f.countryId.errors" class="invalid-feedback text-left">
+            <div *ngIf="f.countryId.errors.required">Country is required</div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <!-- School field -->
+          <label for="schoolId" class="col-form-label col-form-label-sm">Select school</label>
+          <ng-select
+            formControlName="schoolId"
+            placeholder="Harvard University"
+            class="xam-input-primary"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <ng-option *ngFor="let school of schools" [value]="school.id">
+              {{school.school_name}}
+            </ng-option>
+          </ng-select>
+
+          <!-- School field errors -->
+          <div *ngIf="submitted && f.schoolId.errors" class="invalid-feedback text-left">
+            <div *ngIf="f.schoolId.errors.required">School is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-4">
+        <div class="col-md-6 px-0 pr-md-3 pr-lg-5">
+          <!-- Email field -->
+          <label for="email" class="col-form-label col-form-label-sm">E-mail</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control xam-input-primary"
+              formControlName="email"
+              placeholder="john"
+              [ngClass]="{ 'is-invalid': submitted && (f.email.errors || f.schoolAbbreviation.errors) }">
+
+            <!-- Email field errors -->
+            <div class="input-group-append">
+              <ng-select
+                class="xam-input-primary input-group-text"
+                placeholder="@example.edu"
+                [readonly]="!f.schoolId.value"
+                formControlName="schoolAbbreviation"
+              >
+                <ng-option *ngFor="let abbreviation of getSchoolAbbreviation()" [value]="abbreviation">
+                  @{{ abbreviation }}
+                </ng-option>
+              </ng-select>
+            </div>
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.email.errors.message">{{ f.email.errors!.message }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 px-0 pl-md-3 pl-lg-5">
+          <div class="form-group">
+            <!-- Password field -->
+            <label for="password" class="col-form-label col-form-label-sm">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control xam-input-primary"
+              placeholder="Password"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+
+            <!-- Password field errors -->
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center pt-4">
+        <!-- Subtext -->
+        <p>by joining you agree to <a routerLink="/" class="text-dark font-weight-bold"><u>Terms</u></a> and <a routerLink="/" class="text-dark font-weight-bold"><u>Privacy Policy</u></a></p>
+
+        <!-- Sign up button -->
+        <button [disabled]="loading" class="xam-btn-second">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+          Sign Up
+        </button>
+
+        <!-- Error section -->
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+        <!-- Login section -->
+        <div class="mt-5">
+          <a class="text-dark" routerLink="/login">I already have an account. <b>Log in</b></a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

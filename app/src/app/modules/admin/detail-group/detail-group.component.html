@@ -1,0 +1,273 @@
+<div class="container text-center">
+  <!-- Title -->
+  <h1 class="my-4">Group Detail</h1>
+
+  <!-- Form -->
+  <div class="form-wrapper mx-auto my-4">
+    <form class="text-left" [formGroup]="examForm" (ngSubmit)="onSubmit()">
+      <!-- Group name -->
+      <div class="form-group">
+        <!-- Group name field -->
+        <label for="groupName" class="col-form-label col-form-label-sm">Group Name</label>
+        <input
+          formControlName="groupName"
+          class="form-control xam-input-primary"
+          placeholder="Summary"
+          [ngClass]="{ 'is-invalid': submitted && f.groupName.errors }"/>
+
+        <!-- Group name error -->
+        <div *ngIf="submitted && f.groupName.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.groupName.errors.required">Group name is required</div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div>
+        <div class="form-group xam-textarea-wrap">
+          <!-- Summary field -->
+          <div class="xam-pull-tab"></div>
+          <label for="summary" class="col-form-label col-form-label-sm">Summary</label>
+          <textarea
+            formControlName="summary"
+            class="form-control xam-input-primary"
+            placeholder="Summary"
+            [ngClass]="{ 'is-invalid': submitted && f.summary.errors }">
+          </textarea>
+
+          <!-- Summary error -->
+          <div *ngIf="submitted && f.summary.errors" class="invalid-feedback text-left">
+            <div *ngIf="f.summary.errors.required">Summary is required</div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            <!-- Discipline field -->
+            <label for="disciplineId" class="col-form-label col-form-label-sm">Discipline</label>
+            <ng-select
+              formControlName="disciplineId"
+              placeholder="Select discipline"
+              class="xam-input-primary"
+              [ngClass]="{ 'is-invalid': submitted && f.disciplineId.errors }">
+              <ng-option *ngFor="let discipline of disciplines" [value]="discipline.id">
+                {{discipline.name}}
+              </ng-option>
+            </ng-select>
+
+            <!-- Discipline error -->
+            <div *ngIf="submitted && f.disciplineId.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.disciplineId.errors.required">Discipline is required</div>
+            </div>
+          </div>
+
+          <div class="col">
+            <!-- Level field -->
+            <label for="levelId" class="col-form-label col-form-label-sm">Level</label>
+            <ng-select
+              formControlName="levelId"
+              placeholder="Select level"
+              class="xam-input-primary"
+              [ngClass]="{ 'is-invalid': submitted && f.levelId.errors }">
+              <ng-option *ngFor="let level of levels" [value]="level.id">
+                {{level.name}}
+              </ng-option>
+            </ng-select>
+
+            <!-- Level error -->
+            <div *ngIf="submitted && f.levelId.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.levelId.errors.required">Level is required</div>
+            </div>
+          </div>
+
+          <div class="col">
+            <!-- Subject field -->
+            <label for="subjectId" class="col-form-label col-form-label-sm">Subject</label>
+            <ng-select
+              formControlName="subjectId"
+              placeholder="Select subject"
+              class="xam-input-primary"
+              [ngClass]="{ 'is-invalid': submitted && f.subjectId.errors }">
+              <ng-option *ngFor="let subject of subjects" [value]="subject.id">
+                {{subject.name}}
+              </ng-option>
+            </ng-select>
+
+            <!-- Subject error -->
+            <div *ngIf="submitted && f.subjectId.errors" class="invalid-feedback text-left">
+              <div *ngIf="f.subjectId.errors.required">Subject is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <!-- Professor email -->
+              <label for="profEmail" class="col-form-label col-form-label-sm">Professor Email</label>
+              <input
+                type="email"
+                id="profEmail"
+                formControlName="profEmail"
+                class="form-control xam-input-primary"
+                placeholder="Professor Email"
+                (change)="onSearchProf(f.profEmail.value)"
+                [ngClass]="{ 'is-invalid': submitted && f.profEmail.errors }">
+
+              <!-- Professor email errors -->
+              <div *ngIf="submitted && f.profEmail.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profEmail.errors.required">Email is required</div>
+              </div>
+              <div *ngIf="submitted && f.profEmail.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profEmail.errors.email">Invalid email proviced</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <!-- Professor web field -->
+              <label for="profWeb" class="col-form-label col-form-label-sm">Professor Web Address</label>
+              <input
+                id="profWeb"
+                type="text"
+                formControlName="profWeb"
+                class="form-control xam-input-primary"
+                placeholder="Professor Web address"
+                [ngClass]="{ 'is-invalid': submitted && f.profWeb.errors }">
+
+              <!-- Professor web error -->
+              <div *ngIf="submitted && f.profWeb.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profWeb.errors.required">Website address is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <!-- Professor first name field -->
+              <label for="profFirstName" class="col-form-label col-form-label-sm">Professor First Name</label>
+              <input
+                id="profFirstName"
+                type="text"
+                formControlName="profFirstName"
+                class="form-control xam-input-primary"
+                placeholder="Professor First Name"
+                [ngClass]="{ 'is-invalid': submitted && f.profFirstName.errors }">
+
+              <!-- Professor first name error -->
+              <div *ngIf="submitted && f.profFirstName.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profFirstName.errors.required">First Name is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group">
+              <!-- Professor last name field -->
+              <label for="profLastName" class="col-form-label col-form-label-sm">Professor Last Name</label>
+              <input
+                id="profLastName"
+                type="text"
+                formControlName="profLastName"
+                class="form-control xam-input-primary"
+                placeholder="Last Name"
+                [ngClass]="{ 'is-invalid': submitted && f.profLastName.errors }">
+
+              <!-- Professor last name error -->
+              <div *ngIf="submitted && f.profLastName.errors" class="invalid-feedback text-left">
+                <div *ngIf="f.profLastName.errors.required">Last Name is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Ungraded Mock Exam</label>
+          <a
+            *ngIf="getUpload(gmUploadFields.EXAM.ungraded_mock_exam)"
+            href="{{getUpload(gmUploadFields.EXAM.ungraded_mock_exam)}}"
+            class="ml-5"
+            target="_blank">
+            <fa-icon [icon]="faFilePdf"></fa-icon> View
+          </a>
+          <span *ngIf="!getUpload(gmUploadFields.EXAM.ungraded_mock_exam)" class="ml-5">Not generated yet</span>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label col-form-label-sm">Graded Mock Exam</label>
+          <a
+            *ngIf="getUpload(gmUploadFields.EXAM.graded_mock_exam)"
+            href="{{getUpload(gmUploadFields.EXAM.graded_mock_exam)}}"
+            class="ml-5"
+            target="_blank">
+            <fa-icon [icon]="faFilePdf"></fa-icon> View
+          </a>
+          <span *ngIf="!getUpload(gmUploadFields.EXAM.graded_mock_exam)" class="ml-5">Not generated yet</span>
+        </div>
+      </div>
+
+      <!-- Table title -->
+      <h5 class="my-2 font-weight-bold">Group members</h5>
+
+      <!-- Table -->
+      <div class="table-responsive">
+        <table class="table xam-table-primary">
+          <!-- Columns -->
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">School</th>
+              <th scope="col">Grade Value</th>
+              <th scope="col">Exam Date File</th>
+              <th scope="col">Identity File</th>
+              <th scope="col">Exam File</th>
+            </tr>
+          </thead>
+
+          <!-- Rows -->
+          <tbody>
+            <!-- No result -->
+            <tr *ngIf="users.length === 0">
+              <td colspan="8" class="text-center">No result</td>
+            </tr>
+
+            <!-- Row data -->
+            <tr *ngFor="let student of users">
+              <td>{{ student.user.firstName }}</td>
+              <td>{{ student.user.lastName }}</td>
+              <td>{{ student.user.email }}</td>
+              <td>{{ student.user.school.school_name }}</td>
+              <td>{{ student.grade_value }}</td>
+              <td>
+                <a *ngIf="student.date_proven" href="{{ student.date_proven }}" target="_blank" style="min-width: max-content">
+                  <fa-icon [icon]="faFilePdf"></fa-icon> View
+                </a>
+              </td>
+              <td>
+                <a *ngIf="student.identity_proven" href="{{ student.identity_proven }}" target="_blank" style="min-width: max-content">
+                  <fa-icon [icon]="faFilePdf"></fa-icon> View
+                </a>
+              </td>
+              <td>
+                <a *ngIf="student.exam_proven" href="{{ student.exam_proven }}" target="_blank" style="min-width: max-content">
+                  <fa-icon [icon]="faFilePdf"></fa-icon> View
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Button -->
+      <div class="text-center mt-5">
+        <button [disabled]="loading || !studentsMeetFileUploadsRequirement || uploads.length > 0" class="xam-btn-second generate-btn">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.3rem' }"></span>
+          Generate PDF
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </div>
+    </form>
+  </div>
+</div>

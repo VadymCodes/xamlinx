@@ -1,0 +1,53 @@
+.app-signup {
+    // Background image
+    background-image: url('/assets/images/bg-signup.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding: 3.5rem 0; // Adjusting background image size.
+    margin-top: 2rem; // Spacing to the header
+
+    @media only screen and (max-width: 992px) {
+        background-size: cover;
+    }
+
+    .input-group-text {
+        border: 1px solid #FE8178;
+    }
+}
+.signup-main {
+      width: 50rem; // Max-width for responsiveness
+      @media only screen and (max-width: 992px) {
+          width: 90%;
+      }
+      h4 { // Design specification
+          font-size: 2.75rem;
+      }
+      label { // Design specification
+          font-size: 1.298rem;
+      }
+      .bg-cogs {
+          top: -8.5rem; // Positioning for better alignment
+          right: -9rem; // Positioning for better alignment
+          z-index: -1;
+          @media only screen and (max-width: 992px) {
+              top: -5rem; // Positioning for better alignment
+              right: -2.5rem; // Positioning for better alignment
+              width: 16rem; // Resize for better alignment
+          }
+          @media only screen and (max-width: 576px) {
+              width: 0; // Remove the graphic
+          }
+      }
+      button { // Design specification
+          width: 10.125rem;
+          height: 3.25rem;
+          font-size: 1.563rem;
+          span { // Loading symbol
+              width: 1rem;
+              height: 1rem;
+              margin-bottom: 0.6rem;
+          }
+      }
+}

@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
+    container_name: xamlinx_app
+    ports:
+      - 4200:4200
+    container_name: xamlinx_app
+    volumes:
+       - ./app:/usr/src/app/app
+       - /usr/src/app/app/node_modules

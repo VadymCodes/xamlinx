@@ -1,0 +1,81 @@
+:host {
+    @media only screen and (min-width: 992px) {
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+
+    @media only screen and (max-width: 992px) {
+        margin: 1rem auto;
+    }
+
+    @media only screen and (max-width: 576px) {
+        width: 100%;
+    }
+}
+
+.main-container {
+    padding: 0 1.25rem;
+    width: 19.375rem;
+    min-height: 25.625rem;
+    border: 1px solid var(--color-red);
+    background-color: #F9F7F3;
+
+    @media only screen and (max-width: 992px) {
+        border-radius: 0.875rem;
+        width: 17.375rem;
+        min-height: 18.75rem;
+    }
+
+    @media only screen and (max-width: 576px) {
+        width: 100%;
+    }
+}
+
+.xam-input-primary {
+    height: auto;
+
+    @media only screen and (min-width: 992px) {
+      padding: 0 0.719rem;
+
+      ::ng-deep .ng-select-container {
+          height: 26px;
+          min-height: 26px;
+      }
+
+      ::ng-deep .ng-input {
+          top: 0 !important;
+      }
+    }
+}
+
+.form-group {
+    width: 100%;
+}
+
+.value-input {
+    max-width: 6.25rem;
+    text-align: center;
+}
+
+.xam-btn-second {
+    padding: 0;
+    width: 8.875rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.members-select {
+    @media only screen and (max-width: 992px) {
+        height: 2rem;
+        padding: 0 0.45rem;
+    }
+}
+
+button {
+    @media only screen and (max-width: 992px) {
+        margin-top: -0.5rem;
+    }
+}

@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand mb-0 h1" routerLink="/">Xamlinx</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav ml-auto">
+      <!-- General items -->
+      <li class="nav-item" *ngIf="(isStudent || !isLogged) && !isOnAboutPage">
+        <a href="#about" class="nav-link">About</a>
+      </li>
+      <li class="nav-item" *ngIf="(isStudent || !isLogged) && isOnAboutPage">
+        <a routerLink="/about" class="nav-link">About us</a>
+      </li>
+      <li class="nav-item" *ngIf="isStudent || !isLogged">
+        <a href="#how-it-works" class="nav-link" class="nav-link">How it works</a>
+      </li>
+      <li class="nav-item" *ngIf="(isStudent && hasVerfied) || !isLogged">
+        <a routerLink="/requests" routerLinkActive="active" class="nav-link">Requests</a>
+      </li>
+      <li class="nav-item" *ngIf="(isStudent && hasVerfied) || !isLogged">
+        <a routerLink="/exams" routerLinkActive="active" class="nav-link">Uploads</a>
+      </li>
+      <li class="nav-item" *ngIf="(isStudent && hasVerfied) || !isLogged">
+        <a routerLink="/groups" routerLinkActive="active" class="nav-link">Groups</a>
+      </li>
+
+      <!-- Admin items -->
+       <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/users" routerLinkActive="active" class="nav-link">Users</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/demands" routerLinkActive="active" class="nav-link">Requests</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/supplies" routerLinkActive="active" class="nav-link">Uploads</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/group-list" routerLinkActive="active" class="nav-link">Groups</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/reviewers" routerLinkActive="active" class="nav-link">Reviewers</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/payouts" routerLinkActive="active" class="nav-link">Payouts</a>
+      </li>
+      <li class="nav-item" *ngIf="isAdmin">
+        <a routerLink="/admin/settings" routerLinkActive="active" class="nav-link">Settings</a>
+      </li>
+
+      <!-- Reviewer items -->
+      <li class="nav-item" *ngIf="isReviewer">
+        <a routerLink="/reviewer/exams" routerLinkActive="active" class="nav-link">Review</a>
+      </li>
+
+      <!-- Visitor items (Not logged in) -->
+      <li class="nav-item mx-md-2" *ngIf="!isLogged">
+        <a routerLink="/login" routerLinkActive="active" class="nav-link btn-login rec">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLogged">
+        <a routerLink="/signup" routerLinkActive="active" class="nav-link btn-signup rec text-white">Sign up</a>
+      </li>
+
+      <!-- User/ Reviewer items -->
+      <li class="nav-item" *ngIf="isStudent || isReviewer">
+        <a routerLink="/setting/account" routerLinkActive="active" class="nav-link">Account</a>
+      </li>
+      <li class="nav-item" *ngIf="(isStudent || isReviewer) && hasVerfied">
+        <a routerLink="/setting/payment-methods" routerLinkActive="active" class="nav-link">Payment Methods</a>
+      </li>
+
+      <!-- Logout -->
+      <li class="nav-item" *ngIf="isLogged">
+        <a class="nav-link cursor-pointer" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

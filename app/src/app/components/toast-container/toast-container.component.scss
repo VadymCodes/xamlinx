@@ -1,0 +1,7 @@
+.ngb-toasts { // Overriding ng-bootstrap class
+    right: unset;
+    top: unset;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+}

@@ -1,0 +1,34 @@
+.app-payment-method {
+    min-height: 38.5rem;
+    padding: 2rem 0;
+    h1 { // Design specification
+        font-weight: 400;
+        font-family: 'Recoleta-Medium';
+        font-size: 2.75rem;
+        margin: 3rem 0 6.875rem;
+    }
+    form, .table-responsive {
+        width: 60%;
+        @media only screen and (max-width: 850px) {
+            width: 80%;
+        }
+        label {
+            font-family: "Recoleta-Medium";  // Design specification
+        }
+    }
+    form button {
+        position: absolute; // Positioning
+        top: 0;
+        right: 0;
+        height: 2.875rem; // Design specification
+        width: 6.313rem; // Design specification
+        padding: 0; // Ensuring correct size
+        font-size: 1.298rem; // Design specification
+    }
+    .payment-bg {
+        top: 20%; // Positioning according to the design
+        left: 50%; // Positioning to the center
+        transform: translateX(-50%); // Positioning to the center
+        z-index: -1; // Allow to be clicked through
+    }
+}

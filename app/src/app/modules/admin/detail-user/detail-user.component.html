@@ -1,0 +1,83 @@
+<div class="app-detail-user text-center">
+  <h1 class="my-6">User Detail</h1>
+  <form [formGroup]="userForm" class="text-left mx-auto">
+    <div class="row my-4">
+      <div class="col-sm-6 col-lg-5 mr-0 mr-lg-auto">
+        <label class="col-form-label">First Name</label>
+        <input
+          type="text"
+          formControlName="firstName"
+          class="form-control xam-input-primary"
+          placeholder="First Name"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-5 ml-0 ml-lg-auto">
+        <label class="col-form-label">Last Name</label>
+        <input
+          type="text"
+          formControlName="lastName"
+          class="form-control xam-input-primary"
+          placeholder="Last Name"
+          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4">
+      <div class="col-sm-6 col-lg-5 mr-0 mr-lg-auto">
+        <label class="col-form-label">Email</label>
+        <input
+          type="text"
+          formControlName="email"
+          class="form-control xam-input-primary"
+          placeholder="Last Name"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback text-left">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-5 ml-0 ml-lg-auto">
+        <label class="col-form-label">School</label>
+        <input
+          type="text"
+          formControlName="school"
+          class="form-control xam-input-primary">
+      </div>
+    </div>
+    <div class="row my-4">
+      <div class="col">
+        <label class="col-form-label">Verified Status</label>
+        <div class="d-flex align-items-center">
+          <img *ngIf="f.verified.value" src="/assets/images/AboutUs_Points.png" width="60" height="48">
+          <img *ngIf="!f.verified.value" src="/assets/images/target.svg" width="60" height="48">
+          <span *ngIf="f.verified.value">Verfied</span>
+          <span *ngIf="!f.verified.value">Pending</span>
+        </div>
+      </div>
+      <div class="col">
+        <label class="col-form-label">Account Status</label>
+        <div class="d-flex align-items-center">
+          <img *ngIf="f.suspended.value" src="/assets/images/target.svg" width="60" height="48">
+          <img *ngIf="!f.suspended.value" src="/assets/images/AboutUs_Points.png" width="60" height="48">
+          <span *ngIf="f.suspended.value">Suspended</span>
+          <span *ngIf="!f.suspended.value">Active</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-center my-5">
+      <button *ngIf="f.suspended.value" [disabled]="loading" class="xam-btn-second" (click)="onRestore()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+        Restore
+      </button>
+      <button *ngIf="!f.suspended.value" [disabled]="loading" class="xam-btn-second" (click)="onSuspend()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" [ngStyle]="{ 'margin-bottom': '0.6rem' }"></span>
+        Suspend
+      </button>
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    </div>
+  </form>
+</div>

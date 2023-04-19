@@ -1,0 +1,53 @@
+<div class="container text-center">
+  <!-- Title -->
+  <h1 class="mt-0 mb-3">Available Payment Methods</h1>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <!-- Payment methods table -->
+    <table class="table xam-table-primary">
+      <!-- Columns -->
+      <thead>
+        <tr>
+          <th>Payment Method</th>
+          <th class="status-col">Status</th>
+          <th class="action-col">Action</th>
+        </tr>
+      </thead>
+
+      <!-- Rows -->
+      <tbody>
+        <!-- Loading indicator -->
+        <tr *ngIf="loading">
+          <td colspan="3" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No result -->
+        <tr *ngIf="!paymentMethods && !loading">
+          <td colspan="3" class="text-center">No result</td>
+        </tr>
+
+        <!-- Row data -->
+        <tr *ngFor="let method of paymentMethods | keyvalue">
+          <td>{{ method.key }}</td>
+          <td class="status-col">
+            <span *ngIf="method.value" class="badge badge-success">Available</span>
+            <span *ngIf="!method.value" class="badge badge-danger">Unavailable</span>
+          </td>
+          <td class="action-col">
+            <button *ngIf="!method.value" class="btn btn-success btn-sm py-0" (click)="updatePaymentMethod(method, true)" [disabled]="submitted">
+              Activate
+            </button>
+            <button *ngIf="method.value" class="btn btn-danger btn-sm py-0" (click)="updatePaymentMethod(method, false)" [disabled]="submitted">
+              Disable
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

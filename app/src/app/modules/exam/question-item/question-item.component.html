@@ -1,0 +1,35 @@
+<div class="form-group xam-textarea-wrap">
+  <div class="xam-pull-tab"></div>
+  <label for="question" class="col-form-label col-form-label-sm">Question {{index}}</label>
+  <textarea
+    [(ngModel)]="qa.question"
+    (ngModelChange)="qaChange.emit(qa)"
+    class="form-control xam-input-primary"
+    rows="2"
+    placeholder="Question"
+    [readonly]="disabled || qa.is_final">
+  </textarea>
+</div>
+<div class="form-group xam-textarea-wrap">
+  <div class="xam-pull-tab"></div>
+  <label for="solution" class="col-form-label col-form-label-sm">Solution {{index}}</label>
+  <textarea
+    [(ngModel)]="qa.solution"
+    (ngModelChange)="qaChange.emit(qa)"
+    class="form-control xam-input-primary"
+    rows="5"
+    placeholder="Solution"
+    [readonly]="disabled || qa.is_final">
+  </textarea>
+</div>
+<button class="xam-btn-primary" [disabled]="qa.is_final || disabled" (click)="markAsFinal()">{{ qa.is_final == true ? 'Marked as final': 'Mark as final'}}</button>
+<fa-icon [icon]="faQuestionCircle" class="ml-2" title="You can't undo once you marked as final"></fa-icon>
+<div class="form-group">
+  <label for="preview" class="col-form-label col-form-label-sm">Preview</label>
+  <div id="preview" class="form-group">
+    <label for="question-preview" class="col-form-label col-form-label-sm">Question</label>
+    <app-mathjax id="question-preview" [content]='qa.question' class="box"></app-mathjax>
+    <label for="solution-preview" class="col-form-label col-form-label-sm">Solution</label>
+    <app-mathjax id="solution-preview" [content]='qa.solution' class="box"></app-mathjax>
+  </div>
+</div>

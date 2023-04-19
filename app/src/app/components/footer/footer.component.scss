@@ -1,0 +1,32 @@
+footer {
+	  background-image: url(/assets/images/Background_footer.svg);
+    background-size: cover;
+    padding: 8rem 80px 3rem; // Ensuring 80px page margin
+    @media only screen and (max-width: 768px) {
+        padding: 8rem 40px 3rem; // Reduce page margin to 40px in mobile view
+    }
+    .copyright {
+       font-weight: 600;
+    }
+    .nav-item {
+        margin-top: 0.4rem;
+
+        &:first-child {
+          margin-top: 0; // For alignment of the nav items and copyright section
+        }
+    }
+    .nav-column {
+        padding-right: 0 !important; // Overwrite Bootstrap's default behaviour
+    }
+    p {
+        font-size: 1.188rem; // Design specification
+    }
+    a {
+    	  color: var(--color-black);
+        font-size: 1.188rem; // Design specification
+    }
+    h1 { // Following design specification
+        font-size: 3.125rem;
+        font-family: "Recoleta-Medium";
+    }
+}
